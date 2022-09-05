@@ -5,14 +5,8 @@
 // Importing express module
 const express = require('express');
 
-// Importing ApolloServer from apollo-server-express
-const { ApolloServer } = require('apollo-server-express');
-
 // Importing nodejs default path module
 const path = require('path');
-
-// Import graphQL schemas
-const { typeDefs, resolvers } = require('./schemas');
 
 // Database connection import
 const db = require('./config/connection');
@@ -23,11 +17,6 @@ const PORT = process.env.PORT || 3001;
 // Creating express app
 const app = express();
 
-// Creating graphQL apollo server
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
 
 // Express.urlencoded() and express.json() are 
 // middleware to recognize incoming requests as Objects or Strings (urlencoded) or JSON (json)
@@ -44,19 +33,3 @@ app.get('/', (req, res) => {
 });
 
 
-// Create a new instance of an Apollo server with the GraphQL schema
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  server.applyMiddleware({ app });
-  
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-    })
-  })
-  };
-  
-// Call the async function to start the server
-  startApolloServer(typeDefs, resolvers);
- 
