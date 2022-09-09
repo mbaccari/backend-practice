@@ -33,56 +33,41 @@ module.exports = {
             res.status(404).json({ message: 'Email currently in use' });
             return;
         } else {
-            const salt = await bcrypt.genSalt(3)
-            const hashedPass = await bcrypt.hash(req.body.password, salt)
 
-            const newUser = User({
+            User.create({
                 username: req.body.username,
                 email: req.body.email,
-                password: hashedPass
-            });
-            
-            const send = newUser.save();
-            res.status(200).json(send)
+                password: req.body.password
+            }).then((user) => {
+                user.save()
+                res.status(200).json({ message: user.password})
+            })
         }
     },
 
     async login(req, res) {
         const user = await User.findOne({ email: req.body.email })
+        console.log(user)
         if(!user) {
             res.status(404).json({ message:'No user found with this email'})
             return;
         }
-        console.log(req.body.password)
-        console.log(user.password)
-        console.log(await user.isCorrectPassword(req.body.password))
-
-        // User.findOne({ email: req.body.email })
-        // .select('.__v')
-        // .then((user) => {
-        //     if (!user) {
-        //         res.status(404).json({ message: 'No user found with this id' });
-        //         return;
-        //     }
-        //     user.isCorrectPassword(req.body.password)
-        //     console.log(correctPw)
-        // }).catch((err) => res.status(500).send(err))
+        const correctPw = await user.isCorrectPassword(req.body.password);
             
             
-        //     if(!correctPw) {
-        //         res.status(401).json({ message: 'Incorrect password or email'})
-        //     }
+            if(!correctPw) {
+                res.status(401).json({ message: 'Incorrect password or email'})
+            } else {
+                console.log('correct pw')
+            }
 
-        //     const token = signToken(user);
+            const token = signToken(user);
 
-        //     res.send(token)
-
-        //     req.session.token = token;
+            res.status(200).send(token)
             
-        //     return res.status(200).send(user);
         // })
         // .catch((err) => res.status(500).json(err));
-        res.status(400).json({ message: 'ooga'})
+        // res.status(400).json({ message: 'ooga'})
     },
 
     getStatic(req, res) {
