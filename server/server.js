@@ -5,8 +5,7 @@
 // Importing express module
 const express = require('express');
 
-// Importing nodejs default path module
-const path = require('path');
+const routes = require('./routes');
 
 // Database connection import
 const db = require('./config/connection');
@@ -23,13 +22,20 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
+app.use(routes)
 
-// Get home page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../client/build')));
+// }
 
+// // Get home page
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
+db.once('open', () => {
+  console.log('eee')
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  })
+})

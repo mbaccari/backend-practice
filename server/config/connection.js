@@ -1,10 +1,11 @@
-// MongoDB database connection
+const { connect, connection } = require('mongoose');
 
-const mongoose = require('mongoose');
+const connectionString =
+'mongodb+srv://mbaccari:MoNg1!93214@cluster0.t0gy9.mongodb.net/?retryWrites=true&w=majority' || 'mongodb://localhost:27017/testDB';
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/backend-stuff', {
+connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-module.exports = mongoose.connection;
+module.exports = connection;

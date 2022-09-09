@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const secret = process.env.JWT_SECRET_KEY;
-const expiration = '2h';
+const expiration = 7200;
 
 module.exports = {
   signToken: function ({ email, username, _id }) {
