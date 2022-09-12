@@ -48,24 +48,20 @@ module.exports = {
     async login(req, res) {
         try{
             const user = await User.findOne({ email: req.body.email })
-        console.log(user)
         if(!user) {
             res.status(404).json({ message:'No user found with this email'})
             return;
         }
         const correctPw = await user.isCorrectPassword(req.body.password);
-            
-            
             if(!correctPw) {
                 res.status(401).json({ message: 'Incorrect password or email'})
-            } else {
-                console.log('correct pw')
             }
 
             const token = signToken(user);
 
             res.status(200).send(token)
-        } catch{ 
+        } 
+        catch{ 
             (err) => res.send(err)
         }
         
