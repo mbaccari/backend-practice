@@ -71,25 +71,5 @@ module.exports = {
         
     },
 
-    getStatic(req, res) {
-        // const newUser = User({
-        //     username: 'bingy',
-        //     email: 'bigboi@gaymail.com',
-        //     password: "eebly"
-        // });
-
-        // const user = newUser.save();
-
-        // res.send(user)
-
-        User.create({
-            username: 'bingy',
-            email: 'bigboi@gaymail.com',
-            password: "eebly"
-        }).then((user) => {
-            user.save();
-            res.send(user)
-        }).catch((err) => res.status(500).json(err))
-
-    }
+    
 }
