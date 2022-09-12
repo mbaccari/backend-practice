@@ -46,7 +46,8 @@ module.exports = {
     },
 
     async login(req, res) {
-        const user = await User.findOne({ email: req.body.email })
+        try{
+            const user = await User.findOne({ email: req.body.email })
         console.log(user)
         if(!user) {
             res.status(404).json({ message:'No user found with this email'})
@@ -64,10 +65,10 @@ module.exports = {
             const token = signToken(user);
 
             res.status(200).send(token)
-            
-        // })
-        // .catch((err) => res.status(500).json(err));
-        // res.status(400).json({ message: 'ooga'})
+        } catch{ 
+            (err) => res.send(err)
+        }
+        
     },
 
     getStatic(req, res) {
