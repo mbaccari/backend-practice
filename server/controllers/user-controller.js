@@ -1,5 +1,7 @@
 const { User } = require('../models');
 
+
+
 const bcrypt = require('bcrypt')
 
 const { signToken } = require('../utils/auth')
@@ -50,7 +52,6 @@ module.exports = {
             const user = await User.findOne({ email: req.body.email })
         if(!user) {
             res.status(404).json({ message:'No user found with this email'})
-            return;
         }
         const correctPw = await user.isCorrectPassword(req.body.password);
             if(!correctPw) {
@@ -58,8 +59,11 @@ module.exports = {
             }
 
             const token = signToken(user);
+            
+            res.cookie('token', token,{
+                httpOnly: true
+              }).send({message: 'poopity scoop'})
 
-            res.status(200).send(token)
         } 
         catch{ 
             (err) => res.send(err)

@@ -7,6 +7,8 @@ const express = require('express');
 
 const routes = require('./routes');
 
+const cookieParser = require('cookie-parser')
+
 // Database connection import
 const db = require('./config/connection');
 
@@ -21,6 +23,7 @@ const app = express();
 // middleware to recognize incoming requests as Objects or Strings (urlencoded) or JSON (json)
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser())
 
 app.use(routes)
 
