@@ -60,9 +60,10 @@ module.exports = {
 
             const token = signToken(user);
             
-            res.cookie('token', token,{
-                httpOnly: true
-              }).send({message: 'poopity scoop'})
+            // res.cookie('token', token,{
+            //     httpOnly: true
+            //   }).send({message: 'poopity scoop'})
+            res.status(200).send(token)
 
         } 
         catch{ 

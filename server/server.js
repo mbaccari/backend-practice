@@ -7,6 +7,10 @@ const express = require('express');
 
 const routes = require('./routes');
 
+require('dotenv').config()
+
+console.log(process.env.PORT)
+
 const cookieParser = require('cookie-parser')
 
 // Database connection import
