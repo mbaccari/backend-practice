@@ -9,7 +9,7 @@ import Auth from '../utils/Auth';
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
 
-  const [cookies, setCookie] =useCookies()
+  const [cookies, setCookie] =useCookies(['token'])
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -27,12 +27,17 @@ const Login = () => {
 
     const { email, password } = formState;
     console.log(email)
-        fetch("http://localhost:3080/api/users/login", {
-          method: "POST",
-          body: JSON.stringify({ email: email, password: password})
-        }).then(res => {
-          console.log(res)
-        })
+      axios({
+        method: 'post',
+        url: 'http://localhost:3080/api/users/login',
+        data: {
+          email: email,
+          password: password
+        }
+      }).then(res => {
+        setCookie('token', res.data)
+        console.log(res)
+      })
         
     // clear form values
     // setFormState({
