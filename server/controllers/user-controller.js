@@ -1,8 +1,8 @@
 const { User } = require('../models');
 
-
-
 const bcrypt = require('bcrypt')
+
+const jwt = require('jsonwebtoken')
 
 const { signToken } = require('../utils/auth')
 
@@ -10,7 +10,7 @@ const { signToken } = require('../utils/auth')
 module.exports = {
     getUsers(req, res) {
         User.find()
-        .then((user) => res.json(user))
+        .then((user) => res.send(user))
         .catch((err) => res.status(500).json(err));
     },
 
@@ -50,26 +50,24 @@ module.exports = {
     async login(req, res) {
         try{
             const user = await User.findOne({ email: req.body.email })
-        if(!user) {
-            res.status(404).json({ message:'No user found with this email'})
-        }
-        const correctPw = await user.isCorrectPassword(req.body.password);
+            if(!user) {
+                res.status(404).json({ message:'No user found with this email'})
+            }
+            const correctPw = await user.isCorrectPassword(req.body.password);
             if(!correctPw) {
                 res.status(401).json({ message: 'Incorrect password or email'})
             }
-
             const token = signToken(user);
-            
-            // res.cookie('token', token,{
-            //     httpOnly: true
-            //   }).send({message: 'poopity scoop'})
-            res.status(200).send(token)
-
+            res.cookie('token', token,{
+                httpOnly: true
+              }).send(token)
         } 
         catch{ 
-            (err) => res.send(err)
+            (err) => {
+                console.log('oooooooo')
+                res.send(err)
+            }
         }
-        
     },
 
     

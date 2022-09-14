@@ -24,26 +24,16 @@ const Login = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
-    try {
-        axios
-        .post("http://localhost:3080/api/users/login", formState)
-        .then(res => { 
+
+    const { email, password } = formState;
+    console.log(email)
+        fetch("http://localhost:3080/api/users/login", {
+          method: "POST",
+          body: JSON.stringify({ email: email, password: password})
+        }).then(res => {
           console.log(res)
-          const { token } = res.data;
-          Auth.login(token);
-          
-          localStorage.setItem("jwtToken", token);
-          // Decode token to get user data
-          const decoded = jwt_decode(token);
-          console.log(decoded)
         })
-
-      
-    } catch (e) {
-      console.error(e);
-    }
-
+        
     // clear form values
     // setFormState({
     //   email: '',

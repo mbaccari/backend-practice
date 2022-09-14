@@ -7,9 +7,9 @@ const express = require('express');
 
 const routes = require('./routes');
 
-require('dotenv').config()
+const cors = require('cors')
 
-console.log(process.env.PORT)
+require('dotenv').config()
 
 const cookieParser = require('cookie-parser')
 
@@ -29,16 +29,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser())
 
-app.use(routes)
+const corsOptions = {
+  methods: ['GET', 'POST', 'PUT']
+}
+app.use(cors(corsOptions));
+
 
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static(path.join(__dirname, '../client/build')));
 // }
 
-// // Get home page
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// });
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+app.use(routes)
 
 db.once('open', () => {
   console.log('eee')
