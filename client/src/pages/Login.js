@@ -26,24 +26,22 @@ const Login = () => {
     event.preventDefault();
 
     const { email, password } = formState;
-    console.log(email)
-      axios({
-        method: 'post',
-        url: 'http://localhost:3080/api/users/login',
-        data: {
-          email: email,
-          password: password
-        }
-      }).then(res => {
-        setCookie('token', res.data)
-        console.log(res)
-      })
+    axios({
+      method: 'post',
+      url: 'http://localhost:3080/api/users/login',
+      data: {
+        email: email,
+        password: password
+      }
+    }).then(res => {
+      setCookie('token', res.data)
+    })
         
     // clear form values
-    // setFormState({
-    //   email: '',
-    //   password: '',
-    // });
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
   return (
     <main className="flex-row justify-center mb-4 container">
@@ -54,6 +52,8 @@ const Login = () => {
         <div className="col-md-8 col-xs-12">
           <h4 className="text-dark p-2 text-center display-4 fw-bold">Login</h4>
           <div className="card-body">
+
+
           <form onSubmit={handleFormSubmit}>
                 <div className="form-outline mb-4">
                   <label className="form-label fs-5" htmlFor="form3Example1cg">Email:</label>
@@ -61,7 +61,7 @@ const Login = () => {
                     type="text"
                     name="email"
                     className="form-control form-control-lg shadow-sm" 
-                    value={formState.name}
+                    value={formState.email}
                     onChange={handleChange}
                   />
                   
@@ -86,6 +86,7 @@ const Login = () => {
                 </div>
                 <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/signup" className="fw-bold text-body">Register Here</Link></p>
               </form>
+              
             {/* {data ? (
               <p>
                 Success! You may now head{' '}
