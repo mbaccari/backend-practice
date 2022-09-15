@@ -9,7 +9,21 @@ import Auth from '../utils/Auth';
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
 
-  const [cookies, setCookie] =useCookies(['token'])
+  const [cookies, setCookie, removeCookie] = useCookies(['token'])
+
+  const loggedIn = () => {
+    if(!cookies.token) {
+      console.log('no token')
+      return false;
+    } else if(Auth.isTokenExpired(cookies.token)) {
+      console.log('expired token')
+      removeCookie('token',{path:'/'});
+      return false;
+    } else if(Auth.isToken(cookies.token)) {
+      console.log('token plus not expired makes me happy boi')
+      return true;
+    }
+  }
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -38,10 +52,10 @@ const Login = () => {
     })
         
     // clear form values
-    setFormState({
-      email: '',
-      password: '',
-    });
+    // setFormState({
+    //   email: '',
+    //   password: '',
+    // });
   };
   return (
     <main className="flex-row justify-center mb-4 container">
@@ -53,7 +67,12 @@ const Login = () => {
           <h4 className="text-dark p-2 text-center display-4 fw-bold">Login</h4>
           <div className="card-body">
 
-
+          {loggedIn() ? (
+            <p>
+              Success! You may now head{' '}
+              <Link to="/">back to the homepage.</Link>
+            </p>
+          ) : (
           <form onSubmit={handleFormSubmit}>
                 <div className="form-outline mb-4">
                   <label className="form-label fs-5" htmlFor="form3Example1cg">Email:</label>
@@ -86,6 +105,7 @@ const Login = () => {
                 </div>
                 <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/signup" className="fw-bold text-body">Register Here</Link></p>
               </form>
+          )}
               
             {/* {data ? (
               <p>
