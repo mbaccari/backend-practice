@@ -10,7 +10,10 @@ const {
 router
     .route('/')
     .get(getUsers)
-    .post(signUp);
+
+router
+    .route('/signup')
+    .post(signUp)
 
 router
     .route('/login')
