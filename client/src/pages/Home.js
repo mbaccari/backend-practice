@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+
+import styles from './Home.module.css'
 
 import Auth from '../utils/Auth'
 
@@ -24,7 +26,10 @@ const Home = () => {
 
     return (
         <main>
-            {!loggedIn() ? `not logged in` : `logged in`}
+            {!loggedIn() ?
+             `not logged in` 
+            : 
+             `logged in`}
         </main>
     )
 }
