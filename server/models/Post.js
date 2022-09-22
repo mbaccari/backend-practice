@@ -1,5 +1,5 @@
-import { Schema, model} from 'mongoose'
-const PostSchema = new Schema({
+const { Schema, model } = require('mongoose')
+const postSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -8,14 +8,14 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
-    likes: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
-    postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},
+    likes: [{type: Schema.ObjectId, ref: 'User'}],
+    postedBy: {type: Schema.ObjectId, ref: 'User'},
     created: {
         type: Date,
         default: Date.now
     }
 })
 
-const Post = model('Post', PostSchema)
+const Post = model('Post', postSchema);
 
-export default Post;
+module.exports = Post

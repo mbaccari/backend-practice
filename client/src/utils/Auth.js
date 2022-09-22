@@ -24,14 +24,10 @@ class AuthService {
     return false;
   }
 
-  login(idToken) {
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
-  }
-
-  logout() {
-    localStorage.removeItem('id_token');
-    window.location.reload();
+  decodeToken(token) {
+    const decoded = decode(token);
+    console.log(decoded)
+    return decoded.data.email
   }
 }
 
