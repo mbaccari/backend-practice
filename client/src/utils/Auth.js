@@ -13,6 +13,14 @@ class AuthService {
     return false;
   }
 
+  isLoggedIn(token) {
+    if(!token) {
+      return false;
+    } else if(this.isToken(token)) {
+      return true;
+    }
+  }
+
   isTokenExpired(token) {
     // Decode the token to get its expiration time that was set by the server
     const decoded = decode(token);

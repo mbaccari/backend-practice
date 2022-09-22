@@ -12,7 +12,10 @@ const Home = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [decodedToken, setDecodedToken] = useState('')
     useEffect(() => {
-        console.log(Auth.decodeToken(cookies.token))
+        if(Auth.isTokenExpired(cookies.token)) {
+            removeCookie('token',{path:'/'});
+            return false;
+        }
         setDecodedToken(Auth.decodeToken(cookies.token))
       });
 
@@ -28,7 +31,7 @@ const Home = () => {
     }
     return (
         <main>
-            {!loggedIn() ?
+            {!Auth.isLoggedIn(cookies.token) ?
              `not logged in` 
             : 
             <p>{decodedToken}</p> }
