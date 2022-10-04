@@ -10,7 +10,7 @@ module.exports = {
 
     getPostById(req, res) {
         console.log(req.params.id)
-        User.findOne({ _id: req.params.id })
+        Post.findOne({ _id: req.params.id })
         .then((post) => {
             if (!post) {
                 res.status(404).json({ message: 'No post found with this id' });
@@ -22,7 +22,14 @@ module.exports = {
     },
 
     createPost(req, res) {
-        console.log(req.body)
-        Post.create({title: req.body.title, body: req.body.body})
+        console.log(req.body.title)
+        console.log(req.body.body)
+        console.log(req.body.user)
+        res.send( {message: 'oowee'})
+
+        Post.create({title: req.body.title, body: req.body.body, postedBy: req.body.user})
+            .then(post => {
+                console.log(post)
+            })
     }
 }

@@ -42,7 +42,10 @@ module.exports = {
                 password: req.body.password
             }).then((user) => {
                 user.save()
-                res.status(200).json({ message: user.password})
+                const token = signToken(user);
+                res.cookie('token', token,{
+                httpOnly: true
+              }).send(token)
             })
         }
     },
@@ -59,9 +62,8 @@ module.exports = {
                 res.status(401).json({ message: 'Incorrect password or email'})
             }
             const token = signToken(user);
-            res.cookie('token', token,{
-                httpOnly: true
-              }).send(token)
+            console.log('ooo')
+            res.send(token)
         } 
         catch{ 
             (err) => {

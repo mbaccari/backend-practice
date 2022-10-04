@@ -11,6 +11,7 @@ const Login = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['token'])
 
   const loggedIn = () => {
+    console.log(cookies.token)
     if(!cookies.token) {
       console.log('no token')
       return false;
@@ -47,6 +48,7 @@ const Login = () => {
         password: password
       }
     }).then(res => {
+      console.log(res.data)
       setCookie('token', res.data)
     })
         
@@ -104,6 +106,7 @@ const Login = () => {
                 </div>
                 <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/signup" className="fw-bold text-body">Register Here</Link></p>
               </form>
+              
           )}
               
             {/* {data ? (

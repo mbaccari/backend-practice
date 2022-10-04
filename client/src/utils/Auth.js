@@ -1,6 +1,7 @@
 import decode from 'jwt-decode';
 
 class AuthService {
+
   getProfile() {
     return decode(this.getToken());
   }
@@ -15,6 +16,7 @@ class AuthService {
 
   isLoggedIn(token) {
     if(!token) {
+      console.log('nada')
       return false;
     } else if(this.isToken(token)) {
       return true;
@@ -35,7 +37,7 @@ class AuthService {
   decodeToken(token) {
     const decoded = decode(token);
     console.log(decoded)
-    return decoded.data.email
+    return decoded.data
   }
 }
 
