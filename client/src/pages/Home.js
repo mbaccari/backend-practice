@@ -9,6 +9,7 @@ import Auth from '../utils/Auth'
 import UserCard from '../components/UserCard';
 import PostForm from '../components/PostForm';
 import axios from 'axios';
+import Nav from '../components/Nav';
 
 const Home = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
@@ -62,34 +63,59 @@ const Home = () => {
           }).then(res => {
             console.log(res)
           })
+
+        // clear form values
+        setPostState({
+          title: '',
+          body: '',
+        });
     }
 
     return (
         <main>
             {!Auth.isLoggedIn(cookies.token) ?
-             `not logged in` 
+             <>
+                <Nav/>
+                <Link to="/signup" className="fw-bold">Register</Link>/<Link to="/login" className="fw-bold">Login</Link>
+                
+             </>
             : 
-            <>
-                <form onSubmit={submitPost}>
-                    <label htmlFor='title'>Title: </label>
-                    <input 
-                        onChange={handleChange} 
-                        value={postState.title} 
-                        name='title' 
-                        type="text" 
-                    />
+            <div id={styles.main}>
+                <Nav/>
+                <div id={styles.content} className='p-4'>
+                    <div id={styles.block} className="d-flex flex-column align-items-center">
 
-                    <label htmlFor='body'>Body: </label>
-                    <input 
-                        onChange={handleChange} 
-                        value={postState.body} 
-                        name='body' 
-                        type="text" 
-                    />
+                        <form id={styles.form} onSubmit={submitPost} className="d-flex flex-column justify-space-between align-items-center text-center mx-5">
+                            <label htmlFor='title'>Title: </label>
+                            <input 
+                                onChange={handleChange} 
+                                value={postState.title} 
+                                id={styles.titleInput}
+                                name='title' 
+                                type="text" 
+                            />
 
-                    <button type="submit">submit</button>
-                </form>
-            </> }
+                            <label htmlFor='body'>Body: </label>
+                            <textarea 
+                                onChange={handleChange} 
+                                value={postState.body}
+                                id={styles.bodyInput}
+                                name='body' 
+                                type="text" 
+                            />
+
+                            <button id={styles.postButton} type="submit">submit</button>
+                        </form>
+
+                    </div>
+                    <div id={styles.midBlock} className='text-center'>
+                        ooo
+                    </div>
+                    <div id={styles.block} className="d-flex flex-column align-items-center">
+
+                    </div>
+                </div>
+            </div> }
         </main>
     )
 }

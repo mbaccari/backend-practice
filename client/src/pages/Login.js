@@ -53,10 +53,10 @@ const Login = () => {
     })
         
     // clear form values
-    // setFormState({
-    //   email: '',
-    //   password: '',
-    // });
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
   return (
     <main className="flex-row justify-center mb-4 container">
@@ -108,54 +108,6 @@ const Login = () => {
               </form>
               
           )}
-              
-            {/* {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              
-              <form onSubmit={handleFormSubmit}>
-                <div className="form-outline mb-4">
-                  <label className="form-label fs-5" htmlFor="form3Example1cg">Email:</label>
-                  <input 
-                    type="text"
-                    name="email"
-                    className="form-control form-control-lg shadow-sm" 
-                    value={formState.name}
-                    onChange={handleChange}
-                  />
-                  
-                </div>
-                <div className="form-outline mb-4">
-                  <label className="form-label fs-5" htmlFor="form3Example4cg">Password:</label>
-                  <input 
-                    type="password"
-                    name="password"
-                    className="form-control form-control-lg shadow-sm" 
-                    value={formState.password}
-                    onChange={handleChange}
-                  />
-                  
-                </div>
-                <div className="d-flex justify-content-center">
-                  <button
-                  className="btn btn-block btn-dark bg-danger mt-2 shadow"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                  >Login</button>
-                </div>
-                <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/signup" className="fw-bold text-body">Register Here</Link></p>
-              </form>
-
-            )} */}
-
-            {/* {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )} */}
           </div>
         </div>
 
