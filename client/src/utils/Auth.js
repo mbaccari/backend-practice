@@ -36,7 +36,6 @@ class AuthService {
 
   decodeToken(token) {
     const decoded = decode(token);
-    console.log(decoded)
     return decoded.data
   }
 }

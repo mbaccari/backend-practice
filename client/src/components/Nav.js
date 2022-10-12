@@ -5,7 +5,7 @@ const Nav = () => {
     return (
         <nav id={styles.mainNav} className="navbar navbar-expand-sm navbar-dark">
             <div className="container-fluid text-center">
-                <a className="navbar-brand col-4" href="javascript:void(0)">BugBook</a>
+                <a className="navbar-brand col-4" href="/">BugBook</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span className="navbar-toggler-icon" />
                 </button>
