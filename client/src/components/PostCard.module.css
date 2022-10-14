@@ -13,11 +13,17 @@
 
 #postedBy {
     display: flex;
+    flex: row;
     justify-content: space-between;
     align-items: flex-end;
-    width: 15%;
+    width: 18%;
 }
 
+#user {
+    color: #FFFFFF;
+    text-decoration: none;
+    line-height: 100%;
+}
 #time {
     font-size: x-small;
     font-weight: bolder;
@@ -33,12 +39,11 @@
 
 #hr {
     border-radius: 25px;
-    border: 2px solid #FFFFFF;
+    border: 2px solid white;
+    opacity: 1;
 }
 
-#user {
-    color: #FFFFFF;
-}
+
 
 #date {
     font-size: x-small;

@@ -1,13 +1,15 @@
 import styles from './PostCard.module.css'
+import { Link } from "react-router-dom";
 
 
 const PostCard = ({ postData }) => {
+    const userLink = `/users/${postData.userId}`
     
     return (
         <div id={styles.post}>
             <div id={styles.postedBy}>
-                <p id={styles.user}>User</p>
-                <p id={styles.time}>6:30 p.m.</p>
+                <Link id={styles.user} to={userLink} className="fw-bold">{postData.username}</Link>
+                <div id={styles.time}>{postData.time}</div>
             </div>
             
             <div id={styles.body}>
@@ -17,7 +19,7 @@ const PostCard = ({ postData }) => {
             </div>
 
             <div>
-                <p id={styles.date}>{postData.created}</p>
+                <p id={styles.date}>{postData.date}</p>
             </div>
         </div>
     )

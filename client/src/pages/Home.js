@@ -16,7 +16,7 @@ import PostCard from '../components/PostCard';
 const Home = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [decodedToken, setDecodedToken] = useState('');
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     useEffect(() => {
         if(!cookies.token) return;
 
@@ -30,6 +30,7 @@ const Home = () => {
                 url: 'http://localhost:3080/api/posts/'
               }).then(res => {
                 console.log(res.data)
+                if(res.data.length === 0) return;
                 setPosts(res.data)
               }).catch(err => console.log(err))
         }

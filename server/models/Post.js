@@ -9,10 +9,21 @@ const postSchema = new Schema({
         required: true
     },
     likes: [{type: Schema.ObjectId, ref: 'User'}],
-    postedBy: {type: Schema.ObjectId, ref: 'User'},
-    created: {
-        type: Date,
-        default: Date.now
+    userId: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
+    time: {
+        type: String,
+        required: true
     }
 })
 

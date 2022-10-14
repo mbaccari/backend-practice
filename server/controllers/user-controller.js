@@ -19,12 +19,12 @@ module.exports = {
         User.findOne({ _id: req.params.id })
         .then((user) => {
             if (!user) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404);
                 return;
             }
             res.json(user).send(user)
         })
-        .catch((err) => res.status(500).json(err));
+        .catch((err) => res.status(500));
     },
 
     async signUp(req, res) {

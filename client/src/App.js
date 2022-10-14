@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup';
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
             <Route
               path='/signup'
               element={<Signup />}
+            />
+            <Route 
+              path="/users/:userId" 
+              element={<Profile />}
             />
           </Routes>
         </Router>
