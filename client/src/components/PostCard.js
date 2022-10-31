@@ -2,7 +2,7 @@ import styles from './PostCard.module.css'
 import { Link } from "react-router-dom";
 
 
-const PostCard = ({ postData }) => {
+const PostCard = ({ postData, index }) => {
     const userLink = `/users/${postData.userId}`
     
     return (

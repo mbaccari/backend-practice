@@ -65,7 +65,7 @@ const Home = () => {
         const { title, body } = postState;
         axios({
             method: 'post',
-            url: 'http://localhost:3080/api/posts/post',
+            url: '/api/posts/post',
             data: {
               title: title,
               body: body,
@@ -85,14 +85,13 @@ const Home = () => {
     return (
         <main>
             {!Auth.isLoggedIn(cookies.token) ?
-             <>
+             <div id={styles.main}>
                 <Nav/>
-                <Link to="/signup" className="fw-bold">Register</Link>/<Link to="/login" className="fw-bold">Login</Link>
                 
-             </>
+             </div>
             : 
             <div id={styles.main}>
-                <Nav/>
+                <Nav user={decodedToken}/>
                 <div id={styles.content} className='p-4'>
                     <div id={styles.block} className="d-flex flex-column align-items-center">
 
@@ -124,7 +123,7 @@ const Home = () => {
                             <div>
                                 {posts.map((post, index) => {
                                     return (
-                                        <PostCard postData={post}/>
+                                        <PostCard key={index} postData={post}/>
                                     )
                                 })}
                             </div>

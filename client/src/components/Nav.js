@@ -1,22 +1,28 @@
+import { useNavigate, Link } from "react-router-dom";
 
 import styles from './Nav.module.css'
-const Nav = () => {
-    
+const Nav = ({ user }) => {
+    let letter;
+    let url
+    if(user) {
+        letter = user.username.split('')[0].toUpperCase();
+        url = `/users/${user._id}`
+    }
+
     return (
         <nav id={styles.mainNav} className="navbar navbar-expand-sm navbar-dark">
             <div className="container-fluid text-center">
-                <a className="navbar-brand col-4" href="/">BugBook</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                <span className="navbar-toggler-icon" />
-                </button>
-                <div className="collapse navbar-collapse" id="mynavbar">
+                <a className="navbar-brand col-4" id={styles.title} href="/">BugBook</a>
                 
-                <form className="d-flex col-8">
-                    <input className="form-control me-2" type="text" placeholder="Search" />
-                    <button className="btn btn-primary" type="button">Search</button>
-                </form>
-                </div>
+                {!user ? 
+                    <div>
+                        <Link to="/signup" className="fw-bold">Register</Link>/<Link to="/login" className="fw-bold">Login</Link>
+                    </div> 
+                        : 
+                    <Link id={styles.letter} to={url} className="fw-bold text-center">{letter}</Link>
+                }
             </div>
+            
         </nav>
 
     )

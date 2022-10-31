@@ -39,10 +39,16 @@ const Signup = () => {
     event.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:3080/api/users/signup',
+      url: '/api/users/signup',
       data: formState
     }).then(res => {
-      setCookie('token', res.data)
+      const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
+      console.log(res.data.match(regex))
+      if(res.data.match(regex)) {
+        setCookie('token', res.data)
+      } else {
+        console.log('Please fill out correctly')
+      }
     })
         
     // clear form values

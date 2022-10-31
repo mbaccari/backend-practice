@@ -35,18 +35,25 @@ module.exports = {
             res.status(404).json({ message: 'Email currently in use' });
             return;
         } else {
-
-            User.create({
-                username: req.body.username,
-                email: req.body.email,
-                password: req.body.password
-            }).then((user) => {
-                user.save()
-                const token = signToken(user);
-                res.cookie('token', token,{
-                httpOnly: true
-              }).send(token)
-            })
+            try{
+                User.create({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password
+                }).then((user) => {
+                    user.save()
+                    const token = signToken(user);
+                    res.send(token)
+                }).catch((e) => {
+                    res.send('aaaaa')
+                })
+            }
+            catch{
+                (err) => {
+                    res.send(err)
+                }
+            }
+            
         }
     },
 
@@ -55,11 +62,11 @@ module.exports = {
         try{
             const user = await User.findOne({ email: req.body.email })
             if(!user) {
-                res.status(404).json({ message:'No user found with this email'})
+                res.send('No user found with this email')
             }
             const correctPw = await user.isCorrectPassword(req.body.password);
             if(!correctPw) {
-                res.status(401).json({ message: 'Incorrect password or email'})
+                res.send('Incorrect password or email')
             }
             const token = signToken(user);
             console.log('ooo')

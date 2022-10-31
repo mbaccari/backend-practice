@@ -14,28 +14,41 @@ const Profile = () => {
     const queryLink = `http://localhost:3080/api/users/${useParams().userId}`
     
     useEffect(() => {
-        if(!cookies.token) return;
-
-        if(Auth.isTokenExpired(cookies.token)) {
-            removeCookie('token',{path:'/'});
-        } else if(Auth.isLoggedIn(cookies.token)) {
-            setDecodedToken(Auth.decodeToken(cookies.token))
-            axios({
-                method: 'get',
-                url: queryLink
-              }).then(res => {
-                console.log(res.data)
-                if(res.data.length === 0) return;
-                setUser(res.data)
-              }).catch(err => console.log(err))
+        if(cookies.token) {
+            if(Auth.isTokenExpired(cookies.token)) {
+                removeCookie('token',{path:'/'});
+            } else if(Auth.isLoggedIn(cookies.token)) {
+                setDecodedToken(Auth.decodeToken(cookies.token))
+            }
         }
+        axios({
+            method: 'get',
+            url: queryLink
+          }).then(res => {
+            console.log(res.data)
+            if(res.data.length === 0) return;
+            setUser(res.data)
+          }).catch(err => console.log(err))
 
     }, []);
     
 
     return (
         <div>
-            {user.username}
+            {!user ?
+                <>
+                    <div>Loading</div>
+                </>
+                
+                :
+                <>
+                    {decodedToken ? <div>Logged in</div>
+                        :
+                        <div>Not logged in</div>
+                    }
+                    <div>{user.username}</div>
+                </>
+            }
         </div>
     )
 }

@@ -11,16 +11,12 @@ const Login = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['token'])
 
   const loggedIn = () => {
-    console.log(cookies.token)
     if(!cookies.token) {
-      console.log('no token')
       return false;
     } else if(Auth.isTokenExpired(cookies.token)) {
-      console.log('expired token')
       removeCookie('token',{path:'/'});
       return false;
     } else if(Auth.isToken(cookies.token)) {
-      console.log('token plus not expired makes me happy boi')
       return true;
     }
   }
@@ -42,19 +38,25 @@ const Login = () => {
     const { email, password } = formState;
     axios({
       method: 'post',
-      url: 'http://localhost:3080/api/users/login',
+      url: '/api/users/login',
       data: {
         email: email,
         password: password
       }
     }).then(res => {
-      console.log(res.data)
-      setCookie('token', res.data)
+      const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
+      console.log(res.data.match(regex))
+      if(res.data.match(regex)) {
+        setCookie('token', res.data)
+      } else {
+        console.log('Incorrect username or password')
+      }
+      
     })
         
     // clear form values
     setFormState({
-      email: '',
+      email: email, 
       password: '',
     });
   };
@@ -83,6 +85,7 @@ const Login = () => {
                     className="form-control form-control-lg shadow-sm" 
                     value={formState.email}
                     onChange={handleChange}
+                    required
                   />
                   
                 </div>
@@ -94,6 +97,7 @@ const Login = () => {
                     className="form-control form-control-lg shadow-sm" 
                     value={formState.password}
                     onChange={handleChange}
+                    required
                   />
                   
                 </div>
