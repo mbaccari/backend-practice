@@ -69,7 +69,7 @@ const Signup = () => {
           <div className="card-body">
             {loggedIn() ? (
               <p>
-                Success! You may now head{' '}
+                Success! Welcome {formState.username}{' '}
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (

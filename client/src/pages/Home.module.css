@@ -12,7 +12,6 @@
     padding: 1em;
     width: 20%;
     background-color: #8D99AE;
-    border-radius: 20px;
     height: 80vh;
 }
 
@@ -20,10 +19,31 @@
     padding: 1em;
     width: 55%; 
     height: 80vh;
-    border-radius: 20px;
    
     overflow: auto;
+
+
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 #form {
     width: 100%;

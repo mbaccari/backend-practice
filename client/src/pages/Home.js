@@ -82,6 +82,34 @@ const Home = () => {
         });
     }
 
+    const viewPosts = () => {
+        const form = document.querySelector('[data-id="form"]');
+        const posts = document.querySelector('[data-id="posts"]');
+        const profile = document.querySelector('[data-id="profile"]');
+        form.classList.add('invisible')
+        profile.classList.add('invisible')
+        posts.classList.remove('invisible')
+    }
+
+    const viewName = () => {
+        const form = document.querySelector('[data-id="form"]');
+        const posts = document.querySelector('[data-id="posts"]');
+        const profile = document.querySelector('[data-id="profile"]');
+
+        form.classList.add('invisible')
+        posts.classList.add('invisible')
+        profile.classList.remove('invisible')
+    }
+
+    const viewForm = () => {
+        const form = document.querySelector('[data-id="form"]');
+        const posts = document.querySelector('[data-id="posts"]');
+        const profile = document.querySelector('[data-id="profile"]');
+        posts.classList.add('invisible')
+        profile.classList.add('invisible')
+        form.classList.remove('invisible')
+    }
+
     return (
         <main>
             {!Auth.isLoggedIn(cookies.token) ?
@@ -92,8 +120,12 @@ const Home = () => {
             : 
             <div id={styles.main}>
                 <Nav user={decodedToken}/>
+                <button onClick={viewPosts}>posts</button>
+                <button onClick={viewName}>profile</button>
+                <button onClick={viewForm}>form</button>
+
                 <div id={styles.content} className='p-4'>
-                    <div id={styles.block} className="d-flex flex-column align-items-center">
+                    <div data-id='form' id={styles.block} className="invisible d-flex flex-column align-items-center">
 
                         <form id={styles.form} onSubmit={submitPost} className="d-flex flex-column justify-space-between align-items-center text-center mx-5">
                             <label htmlFor='title'>Title: </label>
@@ -118,18 +150,18 @@ const Home = () => {
                         </form>
 
                     </div>
-                    <div id={styles.midBlock} className='text-center'>
+                    <div data-id='posts' id={styles.midBlock} className='text-center'>
                         {!posts ? 'no posts': 
                             <div>
                                 {posts.map((post, index) => {
                                     return (
-                                        <PostCard key={index} postData={post}/>
+                                        <PostCard user={decodedToken} key={index} postData={post}/>
                                     )
                                 })}
                             </div>
                         }
                     </div>
-                    <div id={styles.block} className="d-flex flex-column align-items-center">
+                    <div data-id='profile' id={styles.block} className="invisible d-flex flex-column align-items-center">
 
                     </div>
                 </div>

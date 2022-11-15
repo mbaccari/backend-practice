@@ -1,12 +1,20 @@
 import { useNavigate, Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 import styles from './Nav.module.css'
 const Nav = ({ user }) => {
+
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
     let letter;
-    let url
+    let userLink;
     if(user) {
         letter = user.username.split('')[0].toUpperCase();
-        url = `/users/${user._id}`
+        userLink = `/users/${user._id}`
+    }
+
+    const logout = (event) => {
+        event.preventDefault()
+        removeCookie('token',{path:'/'});
     }
 
     return (
@@ -16,10 +24,13 @@ const Nav = ({ user }) => {
                 
                 {!user ? 
                     <div>
-                        <Link to="/signup" className="fw-bold">Register</Link>/<Link to="/login" className="fw-bold">Login</Link>
+                        <Link id={styles.login} to="/signup" className="fw-bold">Register</Link>/<Link id={styles.login} to="/login" className="fw-bold">Login</Link>
                     </div> 
                         : 
-                    <Link id={styles.letter} to={url} className="fw-bold text-center">{letter}</Link>
+                    <div id={styles.navRight}>
+                        <Link id={styles.letter} to={userLink} className="fw-bold text-center">{letter}</Link>
+                        <i id={styles.logout} className="bi bi-door-closed-fill" onClick={logout}></i>
+                    </div>
                 }
             </div>
             

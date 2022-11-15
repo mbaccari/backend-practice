@@ -11,15 +11,42 @@
     width: 10%;
 }
 
+#login {
+    color: #2B2D42;
+    text-decoration: none;
+}
+
+#login:hover {
+    color: #8D99AE;
+}
+
+#navRight {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 8%;
+}
+
 #letter {
     text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #8D99AE;
-    border: 1.5px solid #2B2D42;
+    border: 1px solid #2B2D42;
     border-radius: 50%;
     height: 1.7em;
     width: 1.7em;
-    
+}
+
+#logout {
+    align-self: flex-end;
+    color:#8D99AE;
+}
+
+#logout:hover, #letter:hover {
+    color: #2B2D42;
+    cursor: pointer;
 }

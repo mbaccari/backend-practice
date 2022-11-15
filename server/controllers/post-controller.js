@@ -34,5 +34,12 @@ module.exports = {
             .then(post => {
                 console.log(post)
             })
+    },
+    
+    async deletePost(req, res) {
+        console.log(req.body.id)
+        Post.findOneAndDelete({ _id: '6372fc0d43c82a08695a04f7' }).then(post => {
+            console.log(post)
+        })
     }
 }
