@@ -50,7 +50,7 @@ const PostCard = ({ postData, user, index }) => {
 
             <div>
                 <p id={styles.date}>{postData.date}</p>
-                {isUser() ? <i id={styles.delete} data-id={postData.userId} className="bi bi-trash-fill" onClick={deletePost}></i> : <></>}
+                {isUser() ? <i id={styles.delete} data-id={postData._id} className="bi bi-trash-fill" onClick={deletePost}></i> : <></>}
             </div>
         </div>
     )

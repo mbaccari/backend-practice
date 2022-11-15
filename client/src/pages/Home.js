@@ -120,9 +120,9 @@ const Home = () => {
             : 
             <div id={styles.main}>
                 <Nav user={decodedToken}/>
+                <button onClick={viewForm}>form</button>
                 <button onClick={viewPosts}>posts</button>
                 <button onClick={viewName}>profile</button>
-                <button onClick={viewForm}>form</button>
 
                 <div id={styles.content} className='p-4'>
                     <div data-id='form' id={styles.block} className="invisible d-flex flex-column align-items-center">

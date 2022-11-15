@@ -38,7 +38,7 @@ module.exports = {
     
     async deletePost(req, res) {
         console.log(req.body.id)
-        Post.findOneAndDelete({ _id: '6372fc0d43c82a08695a04f7' }).then(post => {
+        Post.findOneAndDelete({ _id: req.body.id }).then(post => {
             console.log(post)
         })
     }
