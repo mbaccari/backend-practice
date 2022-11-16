@@ -82,30 +82,26 @@ const Home = () => {
         });
     }
 
+    
+    const form = document.querySelector('[data-id="form"]');
+    const postBlock = document.querySelector('[data-id="posts"]');
+    const profile = document.querySelector('[data-id="profile"]');
+
     const viewPosts = () => {
-        const form = document.querySelector('[data-id="form"]');
-        const posts = document.querySelector('[data-id="posts"]');
-        const profile = document.querySelector('[data-id="profile"]');
         form.classList.add('invisible')
         profile.classList.add('invisible')
-        posts.classList.remove('invisible')
+        postBlock.classList.remove('invisible')
     }
 
     const viewName = () => {
-        const form = document.querySelector('[data-id="form"]');
-        const posts = document.querySelector('[data-id="posts"]');
-        const profile = document.querySelector('[data-id="profile"]');
 
         form.classList.add('invisible')
-        posts.classList.add('invisible')
+        postBlock.classList.add('invisible')
         profile.classList.remove('invisible')
     }
 
     const viewForm = () => {
-        const form = document.querySelector('[data-id="form"]');
-        const posts = document.querySelector('[data-id="posts"]');
-        const profile = document.querySelector('[data-id="profile"]');
-        posts.classList.add('invisible')
+        postBlock.classList.add('invisible')
         profile.classList.add('invisible')
         form.classList.remove('invisible')
     }
