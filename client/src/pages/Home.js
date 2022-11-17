@@ -45,7 +45,10 @@ const Home = () => {
     };
 
     const loggedIn = () => {
+        const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/;
         if(!cookies.token) {
+            return false;
+        } else if(!cookies.token.match(regex)) {
             return false;
         } else if(Auth.isTokenExpired(cookies.token)) {
             removeCookie('token',{path:'/'});

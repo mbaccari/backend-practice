@@ -17,7 +17,7 @@
 }
 
 #buttons :nth-child(n) {
-    background-color: rgb(255, 227, 227);
+    background-color: #e6e8e9;
     width: 75px;
     height: 25px;
     margin-top: 0px;
