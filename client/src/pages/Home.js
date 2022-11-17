@@ -78,35 +78,19 @@ const Home = () => {
         });
     }
 
-    
-    const form = document.querySelector('[data-id="form"]');
-    const postBlock = document.querySelector('[data-id="posts"]');
-    const profile = document.querySelector('[data-id="profile"]');
-    
-
     const viewPosts = () => {
-        form.classList.add('invisible')
-        profile.classList.add('invisible')
-        postBlock.classList.remove('invisible')
         setB1(false);
         setB2(true);
         setB3(false);
     }
 
     const viewName = () => {
-
-        form.classList.add('invisible')
-        postBlock.classList.add('invisible')
-        profile.classList.remove('invisible')
         setB1(false);
         setB2(false);
         setB3(true);
     }
 
     const viewForm = () => {
-        postBlock.classList.add('invisible')
-        profile.classList.add('invisible')
-        form.classList.remove('invisible')
         setB1(true);
         setB2(false);
         setB3(false);
@@ -130,7 +114,7 @@ const Home = () => {
                 
 
                 <div id={styles.content} className='p-4'>
-                    <div data-id='form' id={styles.block} className="invisible d-flex flex-column align-items-center">
+                    <div data-id='form' id={styles.block} className={`d-flex flex-column align-items-center text-center ${!b1 ? 'invisible': ''}`}>
 
                         <form id={styles.form} onSubmit={submitPost} className="d-flex flex-column justify-space-between align-items-center text-center mx-5">
                             <label htmlFor='title'>Title: </label>
@@ -155,7 +139,7 @@ const Home = () => {
                         </form>
 
                     </div>
-                    <div data-id='posts' id={styles.midBlock} className='text-center'>
+                    <div data-id='posts' id={styles.midBlock} className={`text-center ${!b2 ? 'invisible': ''}`}>
                         {!posts ? 'Feed empty': 
                             <div>
                                 {posts.map((post, index) => {
@@ -166,7 +150,7 @@ const Home = () => {
                             </div>
                         }
                     </div>
-                    <div data-id='profile' id={styles.block} className="invisible d-flex flex-column align-items-center">
+                    <div data-id='profile' id={styles.block} className={`d-flex flex-column align-items-center ${!b3 ? 'invisible': ''}`}>
 
                     </div>
                 </div>
