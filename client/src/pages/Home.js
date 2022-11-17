@@ -11,7 +11,10 @@ import PostCard from '../components/PostCard';
 const Home = () => {
     const [cookies, removeCookie] = useCookies(['token']);
     const [decodedToken, setDecodedToken] = useState('');
-    const [posts, setPosts] = useState(null)
+    const [posts, setPosts] = useState(null);
+    const [b1, setB1] = useState(false);
+    const [b2, setB2] = useState(true);
+    const [b3, setB3] = useState(false);
     useEffect(() => {
         if(!cookies.token) return;
 
@@ -79,11 +82,15 @@ const Home = () => {
     const form = document.querySelector('[data-id="form"]');
     const postBlock = document.querySelector('[data-id="posts"]');
     const profile = document.querySelector('[data-id="profile"]');
+    
 
     const viewPosts = () => {
         form.classList.add('invisible')
         profile.classList.add('invisible')
         postBlock.classList.remove('invisible')
+        setB1(false);
+        setB2(true);
+        setB3(false);
     }
 
     const viewName = () => {
@@ -91,12 +98,18 @@ const Home = () => {
         form.classList.add('invisible')
         postBlock.classList.add('invisible')
         profile.classList.remove('invisible')
+        setB1(false);
+        setB2(false);
+        setB3(true);
     }
 
     const viewForm = () => {
         postBlock.classList.add('invisible')
         profile.classList.add('invisible')
         form.classList.remove('invisible')
+        setB1(true);
+        setB2(false);
+        setB3(false);
     }
 
     return (
@@ -109,9 +122,12 @@ const Home = () => {
             : 
             <div id={styles.main}>
                 <Nav user={decodedToken}/>
-                <button onClick={viewForm}>form</button>
-                <button onClick={viewPosts}>posts</button>
-                <button onClick={viewName}>profile</button>
+                <div id={styles.buttons}>
+                    <button style={{height : b1 ? '35px' : ''}} id='form' onClick={viewForm}>form</button>
+                    <button style={{height : b2 ? '35px' : ''}} id='posts' onClick={viewPosts}>posts</button>
+                    <button style={{height : b3 ? '35px' : ''}} id='profile' onClick={viewName}>profile</button>
+                </div>
+                
 
                 <div id={styles.content} className='p-4'>
                     <div data-id='form' id={styles.block} className="invisible d-flex flex-column align-items-center">
