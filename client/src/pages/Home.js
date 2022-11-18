@@ -45,12 +45,10 @@ const Home = () => {
     };
 
     const loggedIn = () => {
-        const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/;
         if(!cookies.token) {
             return false;
-        } else if(!cookies.token.match(regex)) {
-            return false;
         } else if(Auth.isTokenExpired(cookies.token)) {
+            console.log('is token')
             removeCookie('token',{path:'/'});
             return false;
         } else if(Auth.isToken(cookies.token)) {
@@ -117,7 +115,7 @@ const Home = () => {
                 
 
                 <div id={styles.content} className='p-4'>
-                    <div data-id='form' id={styles.block} className={`d-flex flex-column align-items-center text-center ${!b1 ? 'invisible': ''}`}>
+                    <div data-id='form' id={styles.block} className={`d-flex flex-column align-items-center text-center ${!b1 ? 'd-none': ''}`}>
 
                         <form id={styles.form} onSubmit={submitPost} className="d-flex flex-column justify-space-between align-items-center text-center mx-5">
                             <label htmlFor='title'>Title: </label>
@@ -142,7 +140,7 @@ const Home = () => {
                         </form>
 
                     </div>
-                    <div data-id='posts' id={styles.midBlock} className={`text-center ${!b2 ? 'invisible': ''}`}>
+                    <div data-id='posts' id={styles.midBlock} className={`text-center ${!b2 ? 'd-none': ''}`}>
                         {!posts ? 'Feed empty': 
                             <div>
                                 {posts.map((post, index) => {
@@ -153,7 +151,7 @@ const Home = () => {
                             </div>
                         }
                     </div>
-                    <div data-id='profile' id={styles.block} className={`d-flex flex-column align-items-center ${!b3 ? 'invisible': ''}`}>
+                    <div data-id='profile' id={styles.block} className={`d-flex flex-column align-items-center ${!b3 ? 'd-none': ''}`}>
 
                     </div>
                 </div>

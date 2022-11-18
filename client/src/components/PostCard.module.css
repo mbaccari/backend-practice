@@ -1,6 +1,6 @@
 #post {
-    background-color: #EDF2F4;
     display: flex;
+    background-color: #EDF2F4;
     justify-content: space-between;
     flex-direction: column;
     margin: 10px 0px;

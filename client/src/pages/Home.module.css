@@ -1,19 +1,23 @@
 #main {
     background-color: #EDF2F4;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+
+    width: 100vw;
 }
 
 #buttons {
     width: 25%;
-    margin-left: 0px;
+    margin-left: 5px;
     margin-top: 0px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #buttons :nth-child(n) {
@@ -22,25 +26,29 @@
     height: 25px;
     margin-top: 0px;
     border: 1px solid black;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-style: none solid solid solid;
+    
+    box-shadow: 0 1px 2px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: none;
 }
 
 #block {
+    background-color: #EDF2F4;
     padding: 1em;
-    width: 20%;
-    background-color: #8D99AE;
+    width: 55%;
     height: 80vh;
+    box-shadow: -3px 3px 1px;
+    border: 1px black solid;
 }
 
 #midBlock {
     padding: 1em;
     width: 55%; 
     height: 80vh;
-   
     overflow: auto;
-
-
+    align-self: center;
 }
 
 /* width */
@@ -66,29 +74,34 @@
 #form {
     width: 100%;
     height: 75%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
+    font-weight: bolder;
 }
 
 #titleInput {
-    border-radius: 10px;
     width: 90%;
     height: 10%;
-    background-color: #EDF2F4;
-    border: none;
+    background-color: #dddedd;
+    border: 1px solid black;
+    box-shadow: -1px 1px 1px;
 }
 
 #bodyInput {
-    border-radius: 10px;
     width: 90%;
     height: 75%;
-    background-color: #EDF2F4;
-    border: none;
+    background-color: #dddedd;
+    border: 1px solid black;
     resize: none;
+    box-shadow: -1px 1px 1px;
 }
 
 #postButton {
+    padding: none;
     width: 85px;
-    background-color: #EDF2F4;
-    border-radius: 10px;
+    background-color: #dddedd;
     margin-top: 5%;
-    border: none;
+    border: 1px solid black;
+    font-weight: lighter;
+    box-shadow: -1px 1px 1px;
 }
