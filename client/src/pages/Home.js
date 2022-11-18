@@ -62,7 +62,7 @@ const Home = () => {
             return false;
         } else if(Auth.isTokenExpired(cookies.token)) {
             console.log('is token')
-            removeCookie('token',{path:'/'});
+            cookies.remove('token', {path: '/'})
             return false;
         } else if(Auth.isToken(cookies.token)) {
             return true;

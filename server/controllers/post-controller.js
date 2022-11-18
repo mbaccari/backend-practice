@@ -1,6 +1,7 @@
 const { User, Post } = require('../models');
 const { create } = require('../models/Post');
 const moment = require('moment');
+const { rawListeners } = require('../models/User');
 
 
 
@@ -33,6 +34,11 @@ module.exports = {
         Post.create({title: req.body.title, body: req.body.body, userId: req.body.user._id, username: req.body.user.username, date: formatted_date, time: formatted_time})
             .then(post => {
                 console.log(post)
+                User.findOne({ _id: req.body.user._id})
+                    .then(user => {
+                        user.posts.push(post);
+                        user.save();
+                    })
             })
     },
     

@@ -47,6 +47,7 @@ const Profile = () => {
                         <div>Not logged in</div>
                     }
                     <div>{user.username}</div>
+                    <div>{user.email}</div>
                 </>
             }
         </div>
