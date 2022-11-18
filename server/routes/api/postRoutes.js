@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
     getPosts,
     getPostById,
+    getPostByUser,
     createPost,
     deletePost
 } = require('../../controllers/post-controller');
@@ -13,6 +14,10 @@ router
 router
     .route('/:id')
     .get(getPostById)
+
+router
+    .route('/userposts/:id')
+    .get(getPostByUser)
 
 router
     .route('/post')

@@ -26,6 +26,15 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
+    getPostByUser(req, res) {
+        console.log(req.params.id)
+        Post.find({ userId: req.params.id })
+            .then(posts => {
+                console.log(posts)
+                res.send(posts)
+            })
+    },
+
     createPost(req, res) {
         const formatted_date = moment().format('MMM. DD, YYYY');
         const formatted_time = moment().format("h:mm A")

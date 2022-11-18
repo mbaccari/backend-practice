@@ -24,7 +24,7 @@ const Home = () => {
         }).then(res => {
             let postArray = [];
             if(res.data.length === 0) return;
-            for(let i = res.data.length-1; i > 0; i--) { 
+            for(let i = res.data.length-1; i >= 0; i--) { 
                 postArray.push(res.data[i]);
             }
 
@@ -62,7 +62,7 @@ const Home = () => {
             return false;
         } else if(Auth.isTokenExpired(cookies.token)) {
             console.log('is token')
-            cookies.remove('token', {path: '/'})
+            removeCookie('token',{path:'/'});
             return false;
         } else if(Auth.isToken(cookies.token)) {
             return true;
