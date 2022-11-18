@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 
-const PostCard = ({ postData, user, index }) => {
+const PostCard = ({ postData, user }) => {
     const userLink = `/users/${postData.userId}`
     const letter = postData.username.split('')[0].toUpperCase();
 
@@ -15,7 +15,7 @@ const PostCard = ({ postData, user, index }) => {
         }
     }
 
-    const deletePost = (event) => {
+    const deletePost = async (event) => {
         axios({
             method: 'delete',
             url: '/api/posts/delete',
@@ -26,6 +26,8 @@ const PostCard = ({ postData, user, index }) => {
             console.log(res)
           })
         console.log(event.target.dataset.id)
+        window.location.reload()
+
     }
     
     return (

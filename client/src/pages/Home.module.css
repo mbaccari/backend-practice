@@ -29,8 +29,8 @@
     border-style: none solid solid solid;
     
     box-shadow: 0 1px 2px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     padding: none;
 }
 
@@ -79,21 +79,20 @@
     font-weight: bolder;
 }
 
-#titleInput {
+#titleInput, #bodyInput {
     width: 90%;
-    height: 10%;
-    background-color: #dddedd;
+    background-color: #2b2d422b;
     border: 1px solid black;
     box-shadow: -1px 1px 1px;
+    resize: none;
+}
+
+#titleInput {
+    height: 10%;
 }
 
 #bodyInput {
-    width: 90%;
     height: 75%;
-    background-color: #dddedd;
-    border: 1px solid black;
-    resize: none;
-    box-shadow: -1px 1px 1px;
 }
 
 #postButton {

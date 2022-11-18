@@ -15,20 +15,33 @@ const Home = () => {
     const [b1, setB1] = useState(false);
     const [b2, setB2] = useState(true);
     const [b3, setB3] = useState(false);
+
+    const getAllPosts = () => {
+        console.log('refreshing posts')
+        axios({
+            method: 'get',
+            url: 'http://localhost:3080/api/posts/'
+        }).then(res => {
+            let postArray = [];
+            if(res.data.length === 0) return;
+            for(let i = res.data.length-1; i > 0; i--) { 
+                postArray.push(res.data[i]);
+            }
+
+            setPosts(postArray)
+            setB1(false);
+            setB2(true);
+            setB3(false);
+        }).catch(err => console.log(err))
+    }
     useEffect(() => {
         if(!cookies.token) return;
 
         if(Auth.isTokenExpired(cookies.token)) {
-            removeCookie('token',{path:'/'});
+            removeCookie('token');
         } else if(Auth.isLoggedIn(cookies.token)) {
             setDecodedToken(Auth.decodeToken(cookies.token))
-            axios({
-                method: 'get',
-                url: 'http://localhost:3080/api/posts/'
-              }).then(res => {
-                if(res.data.length === 0) return;
-                setPosts(res.data)
-              }).catch(err => console.log(err))
+            getAllPosts()
         }
 
     }, [cookies.token, removeCookie]);
@@ -60,6 +73,7 @@ const Home = () => {
         event.preventDefault()
         if(!loggedIn()) return;
         const { title, body } = postState;
+        if(!title || !body) return;
         axios({
             method: 'post',
             url: '/api/posts/post',
@@ -69,14 +83,23 @@ const Home = () => {
               user: decodedToken
             }
           }).then(res => {
-            console.log(res)
+            getAllPosts();
           })
+
 
         // clear form values
         setPostState({
           title: '',
           body: '',
         });
+    }
+
+    const arePosts = () => {
+        if(!posts ||posts.length === 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     const viewPosts = () => {
@@ -108,11 +131,10 @@ const Home = () => {
             <div id={styles.main}>
                 <Nav user={decodedToken}/>
                 <div id={styles.buttons}>
-                    <button style={{height : b1 ? '35px' : ''}} id='form' onClick={viewForm}>form</button>
-                    <button style={{height : b2 ? '35px' : ''}} id='posts' onClick={viewPosts}>posts</button>
-                    <button style={{height : b3 ? '35px' : ''}} id='profile' onClick={viewName}>profile</button>
+                    <button style={{height : b1 ? '30px' : ''}} id='form' onClick={viewForm}>form</button>
+                    <button style={{height : b2 ? '30px' : ''}} id='posts' onClick={viewPosts}>posts</button>
+                    <button style={{height : b3 ? '30px' : ''}} id='profile' onClick={viewName}>profile</button>
                 </div>
-                
 
                 <div id={styles.content} className='p-4'>
                     <div data-id='form' id={styles.block} className={`d-flex flex-column align-items-center text-center ${!b1 ? 'd-none': ''}`}>
@@ -125,6 +147,7 @@ const Home = () => {
                                 id={styles.titleInput}
                                 name='title' 
                                 type="text" 
+                                maxLength='25'
                             />
 
                             <label htmlFor='body'>Body: </label>
@@ -141,11 +164,11 @@ const Home = () => {
 
                     </div>
                     <div data-id='posts' id={styles.midBlock} className={`text-center ${!b2 ? 'd-none': ''}`}>
-                        {!posts ? 'Feed empty': 
+                        {!arePosts() ? 'Feed empty': 
                             <div>
                                 {posts.map((post, index) => {
                                     return (
-                                        <PostCard user={decodedToken} key={index} postData={post}/>
+                                        <PostCard user={decodedToken} key={index} postData={post} />
                                     )
                                 })}
                             </div>
