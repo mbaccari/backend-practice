@@ -4,7 +4,7 @@ const {
     getUserById,
     signUp,
     login,
-    getStatic
+    editUser
 } = require('../../controllers/user-controller');
 
 router
@@ -22,5 +22,7 @@ router
 router.route('/:id')
     .get(getUserById)
 
-
+router
+    .route('/editUser')
+    .post(editUser)
 module.exports = router;

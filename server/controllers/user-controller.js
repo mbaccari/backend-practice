@@ -80,5 +80,15 @@ module.exports = {
         }
     },
 
+    editUser(req, res) {
+        console.log(req.body);
+        User.updateOne(
+            { _id: req.body.id },
+            {$set: {[req.body.edit]: req.body.payload}}
+        ).then((user) => {
+            console.log(`new user ${req.body.edit}`)
+        }).catch ((err) => res.status(500).json(err))
+    }
+
     
 }

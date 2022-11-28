@@ -19,6 +19,11 @@ const userSchema = new Schema({
       required: true,
       minlength: 5,
     },
+    bio: {
+      type: String,
+      default: '',
+      unique: false
+    },
     posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
   });
 
