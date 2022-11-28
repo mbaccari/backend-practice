@@ -7,6 +7,7 @@ import Auth from '../utils/Auth'
 import axios from 'axios';
 import Nav from '../components/Nav';
 import PostCard from '../components/PostCard';
+import UserCard from '../components/UserCard';
 
 const Home = () => {
     const [cookies, removeCookie] = useCookies(['token']);
@@ -85,7 +86,6 @@ const Home = () => {
           }).then(res => {
             getAllPosts();
           })
-
 
         // clear form values
         setPostState({
@@ -175,7 +175,10 @@ const Home = () => {
                         }
                     </div>
                     <div data-id='profile' id={styles.block} className={`d-flex flex-column align-items-center ${!b3 ? 'd-none': ''}`}>
-
+                        {!decodedToken ? 'Loading' :
+                            <UserCard userInfo={decodedToken} />
+                        }
+                        
                     </div>
                 </div>
             </div> }
