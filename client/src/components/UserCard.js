@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import styles from './UserCard.module.css'
 
 const UserCard = ({ userInfo }) => {
     const url = `/api/users/${userInfo._id}`;
@@ -13,7 +14,8 @@ const UserCard = ({ userInfo }) => {
         }).then(res => {
             if(res.data.length === 0) return;
             console.log(res.data)
-            setUser(res.data);
+            const { email, bio, username, _id } = res.data
+            setUser({bio:bio, username: username, email: email, id: _id});
         }).catch(err => console.log(err))
     }
 
@@ -26,7 +28,11 @@ const UserCard = ({ userInfo }) => {
         setBio(event.target.value)
         console.log(bio)
     }
-    
+
+    const editBio = (event) => {
+        event.preventDefault();
+        setUser({...user, bio: ''})
+    }    
     const bioChange = (event) => {
         event.preventDefault();
         console.log(bio)
@@ -34,12 +40,14 @@ const UserCard = ({ userInfo }) => {
             method: 'post',
             url: '/api/users/editUser',
             data: {
-              id: user._id,
+              id: user.id,
               edit: 'bio',
               payload: bio
             }
           }).then((res) => {
             console.log(res)
+            console.log('helllllllooooo')
+            setUser({...user, bio: bio})
           })
     }
 
@@ -47,18 +55,21 @@ const UserCard = ({ userInfo }) => {
         <>
             {!user ? <p>no user</p> : 
                 <>
-                    <p>Email: {user.email}</p>
-                    <p>Username: {userInfo.username}</p>
-                    {user.bio ? <p>{user.bio}</p> : 'user has no bio'}
-                    <form onSubmit={bioChange}>
-                    <textarea
-                        id="bio"
-                        name="bio"
-                        value={bio}
-                        onChange={handleChange}
-                    />
-                        <button type='submit'>Add bio</button>
-                    </form>
+                    {user.email ? <p>{user.email}</p> : <p>no email</p>}
+                    {user.username ? <p>{user.username}</p> : <p>no username</p>}
+                    {user.bio ?
+                        <div><p>{user.bio}</p><button onClick={editBio}>Edit</button></div>
+                    :
+                        <form onSubmit={bioChange}>
+                            <textarea
+                                id="bio"
+                                name="bio"
+                                value={bio}
+                                onChange={handleChange}
+                            />
+                            <button type='submit'>Add bio</button>
+                        </form>
+                    }
                 </>
             }
         </>

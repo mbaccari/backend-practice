@@ -87,6 +87,7 @@ module.exports = {
             {$set: {[req.body.edit]: req.body.payload}}
         ).then((user) => {
             console.log(`new user ${req.body.edit}`)
+            res.send('hello')
         }).catch ((err) => res.status(500).json(err))
     }
 
