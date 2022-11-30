@@ -41,12 +41,16 @@
     width: 1.7em;
 }
 
-#logout {
+#home {
+    color:#8D99AE;
+}
+
+#logout, #home {
     align-self: flex-end;
     color:#8D99AE;
 }
 
-#logout:hover, #letter:hover {
+#logout:hover, #letter:hover, #home:hover {
     color: #2B2D42;
     cursor: pointer;
 }

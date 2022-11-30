@@ -130,9 +130,12 @@ const Home = () => {
             <div id={styles.main}>
                 <Nav user={decodedToken}/>
                 <div id={styles.buttons}>
-                    <button style={{height : b1 ? '30px' : ''}} id='form' onClick={viewForm}>form</button>
-                    <button style={{height : b2 ? '30px' : ''}} id='posts' onClick={viewPosts}>posts</button>
-                    <button style={{height : b3 ? '30px' : ''}} id='profile' onClick={viewName}>profile</button>
+                    <button style={{height : b1 ? '30px' : '26px', 
+                                    boxShadow : b1 ? '' : '0 4px 0px'}} id='form' onClick={viewForm}>form</button>
+                    <button style={{height : b2 ? '30px' : '26px',
+                                    boxShadow : b2 ? '' : '0 4px 0px'}} id='posts' onClick={viewPosts}>posts</button>
+                    <button style={{height : b3 ? '30px' : '26px',
+                                    boxShadow : b3 ? '' : '0 4px 0px'}} id='profile' onClick={viewName}>profile</button>
                 </div>
 
                 <div id={styles.content} className='p-4'>

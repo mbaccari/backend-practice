@@ -7,6 +7,7 @@ import axios from 'axios';
 import Api from '../utils/Api'
 
 import Auth from '../utils/Auth';
+import Nav from '../components/Nav';
 
 const Profile = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
@@ -56,6 +57,7 @@ const Profile = () => {
 
     return (
         <div>
+            <Nav user={user} page={'home'} />
             {!user ?
                 <>
                     <div>Loading</div>

@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 
 import styles from './Nav.module.css'
-const Nav = ({ user }) => {
+const Nav = ({ user, page }) => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     let letter;
@@ -17,6 +17,14 @@ const Nav = ({ user }) => {
         removeCookie('token',{path:'/'});
     }
 
+    const checkPage = () => {
+        if(page === 'home') {
+            return true;
+        } else if(page === 'profile') {
+            return false;
+        }
+    }
+
     return (
         <nav id={styles.mainNav} className="navbar navbar-expand-sm navbar-dark">
             <div className="container-fluid text-center">
@@ -28,7 +36,11 @@ const Nav = ({ user }) => {
                     </div> 
                         : 
                     <div id={styles.navRight}>
-                        <Link id={styles.letter} to={userLink} className="fw-bold text-center">{letter}</Link>
+                        {!checkPage() ? 
+                            <Link id={styles.letter} to={userLink} className="fw-bold text-center">{letter}</Link>
+                        :
+                            <Link id={styles.home} className='bi bi-house-fill' to={'/'}></Link>
+                        }
                         <i id={styles.logout} className="bi bi-door-closed-fill" onClick={logout}></i>
                     </div>
                 }
