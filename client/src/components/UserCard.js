@@ -4,6 +4,7 @@ import styles from './UserCard.module.css'
 
 const UserCard = ({ userInfo }) => {
     const url = `/api/users/${userInfo._id}`;
+    const letter = userInfo.username.split('')[0].toUpperCase();
     const [ user, setUser ] = useState(null);
     const [ bio, setBio ] = useState('')
 
@@ -53,21 +54,32 @@ const UserCard = ({ userInfo }) => {
         <div id={styles.container}>
             {!user ? <p>no user</p> : 
                 <>
-                    {user.email ? <p>{user.email}</p> : <p>no email</p>}
-                    {user.username ? <p>{user.username}</p> : <p>no username</p>}
-                    {user.bio ?
-                        <div><p>{user.bio}</p><button onClick={editBio}>Edit</button></div>
-                    :
-                        <form onSubmit={bioChange}>
-                            <textarea
-                                id="bio"
-                                name="bio"
-                                value={bio}
-                                onChange={handleChange}
-                            />
-                            <button type='submit'>Add bio</button>
-                        </form>
-                    }
+                    <div id={styles.letterBox}>
+                        <div id={styles.letter}>{letter}</div>
+                    </div>
+                    {user.username ? <h5 id={styles.username}>{user.username}</h5> : <p>no username</p>}
+                    
+                    <div id={styles.body}>
+                            <h4>Bio {!user.bio ? '' : <i id={styles.editBio} className='bi bi-pencil' onClick={editBio}></i> }</h4>
+                        
+                        {user.bio ?
+                            <div>
+                                <hr id={styles.hr} />
+                                <p id={styles.bioBox}>{user.bio}</p>
+                            </div>
+                        :
+                            <form onSubmit={bioChange}>
+                                <textarea
+                                    id="bio"
+                                    name="bio"
+                                    value={bio}
+                                    onChange={handleChange}
+                                />
+                                <button type='submit'>Add bio</button>
+                            </form>
+                        }
+                        </div>
+                    
                 </>
             }
         </div>
