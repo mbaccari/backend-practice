@@ -45,14 +45,12 @@ const UserCard = ({ userInfo }) => {
               payload: bio
             }
           }).then((res) => {
-            console.log(res)
-            console.log('helllllllooooo')
             setUser({...user, bio: bio})
           })
     }
 
     return (
-        <>
+        <div id={styles.container}>
             {!user ? <p>no user</p> : 
                 <>
                     {user.email ? <p>{user.email}</p> : <p>no email</p>}
@@ -72,7 +70,7 @@ const UserCard = ({ userInfo }) => {
                     }
                 </>
             }
-        </>
+        </div>
         
     )
 }

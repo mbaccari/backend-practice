@@ -10,7 +10,7 @@ import PostCard from '../components/PostCard';
 import UserCard from '../components/UserCard';
 
 const Home = () => {
-    const [cookies, removeCookie] = useCookies(['token']);
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [decodedToken, setDecodedToken] = useState('');
     const [posts, setPosts] = useState(null);
     const [b1, setB1] = useState(false);
@@ -37,9 +37,8 @@ const Home = () => {
     }
     useEffect(() => {
         if(!cookies.token) return;
-
         if(Auth.isTokenExpired(cookies.token)) {
-            removeCookie('token');
+            removeCookie('token')
         } else if(Auth.isLoggedIn(cookies.token)) {
             setDecodedToken(Auth.decodeToken(cookies.token))
             getAllPosts()
