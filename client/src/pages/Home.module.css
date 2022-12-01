@@ -18,7 +18,7 @@
     margin-top: 0px;
     display: flex;
     justify-content: flex-start;
-    font-family: 'Times New Roman', Times, serif;
+    color: #2B2D42;
 }
 
 #buttons :nth-child(n) {
@@ -28,7 +28,8 @@
     margin-right: 1px;
     border: 1px solid black;
     border-style: none solid solid solid;
-    
+    font-weight: bold;
+    color: #2B2D42;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     padding: none;

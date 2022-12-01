@@ -3,17 +3,42 @@ import { Link, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import PostCard from '../components/PostCard';
 import axios from 'axios';
+import styles from './Profile.module.css'
 
 import Api from '../utils/Api'
 
 import Auth from '../utils/Auth';
 import Nav from '../components/Nav';
+import UserCard from '../components/UserCard';
+
+import ReactPaginate from 'react-paginate';  
 
 const Profile = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [ user, setUser ] = useState();
     const [posts, setPosts] = useState(null);
     const [decodedToken, setDecodedToken] = useState('');
+
+    // pagination states and constants
+    const [currentPage, setCurrentPage] = useState(0);
+    const [data, setData] = useState([]);
+
+    const PER_PAGE = 1;
+    const offset = currentPage * PER_PAGE;
+    const currentPageData = data
+        .slice(offset, offset + PER_PAGE)
+        .map((post, index) => {
+            console.log(post)
+            return <PostCard user={decodedToken} key={index} postData={post} />
+        });
+    const pageCount = Math.ceil(data.length / PER_PAGE);
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
+
+
+
+
     const getUser = `/api/users/${useParams().userId}`;
     const getPosts = `/api/posts/userposts/${useParams().userId}`
     
@@ -41,6 +66,7 @@ const Profile = () => {
                     postArray.push(res.data[i]);
                 }
                 setPosts(postArray)
+                setData(postArray)
             })
             setUser(res.data)
           }).catch(err => console.log(err))
@@ -64,23 +90,33 @@ const Profile = () => {
                 </>
                 
                 :
-                <>
-                    {decodedToken ? <div>Logged in</div>
-                        :
-                        <div>Not logged in</div>
-                    }
-                    <div>{user.username}</div>
-                    <div>{user.email}</div>
+                <div id={styles.pageContainer}>
+                    <UserCard userInfo={user} />
                     {!arePosts() ? 'Feed empty': 
-                            <div>
-                                {posts.map((post, index) => {
-                                    return (
-                                        <PostCard user={decodedToken} key={index} postData={post} />
-                                    )
-                                })}
-                            </div>
+                            // <div id={styles.postContainer}>
+                            //     {posts.map((post, index) => {
+                            //         return (
+                            //             <PostCard user={decodedToken} key={index} postData={post} />
+                            //         )
+                            //     })}
+                            // </div>
+                            <>
+                                {currentPageData}
+                                <ReactPaginate
+                                    previousLabel={""}
+                                    nextLabel={""}
+                                    pageCount={pageCount}
+                                    onPageChange={handlePageClick}
+                                    containerClassName={"pagination"}
+                                    previousLinkClassName={"bi bi-arrow-left-circle"}
+                                    nextLinkClassName={"bi bi-arrow-right-circle"}
+                                    disabledClassName={"pagination__link--disabled"}
+                                    activeClassName={"bg-danger"}
+                                />
+                                
+                            </>
                         }
-                </>
+                </div>
             }
         </div>
     )

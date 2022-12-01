@@ -10,6 +10,7 @@
     font-family: sans-serif;
     box-shadow: -3px 3px 1px;
     border: 1px black solid;
+    max-width: 600px;
 }
 
 #top {
