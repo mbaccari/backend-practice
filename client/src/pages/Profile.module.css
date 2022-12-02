@@ -3,3 +3,7 @@
     flex-direction: column;
     align-items: center;
 }
+
+#paginateBox {
+    width: 500px;
+}

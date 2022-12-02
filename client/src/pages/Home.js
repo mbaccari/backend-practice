@@ -159,6 +159,7 @@ const Home = () => {
                                 id={styles.bodyInput}
                                 name='body' 
                                 type="text" 
+                                maxLength='300'
                             />
 
                             <button id={styles.postButton} type="submit">submit</button>

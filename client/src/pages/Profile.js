@@ -11,7 +11,8 @@ import Auth from '../utils/Auth';
 import Nav from '../components/Nav';
 import UserCard from '../components/UserCard';
 
-import ReactPaginate from 'react-paginate';  
+import ReactPaginate from 'react-paginate'; 
+import './pagination.css' 
 
 const Profile = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
@@ -101,8 +102,24 @@ const Profile = () => {
                             //     })}
                             // </div>
                             <>
-                                {currentPageData}
                                 <ReactPaginate
+                                    activeClassName={'item active '}
+                                    breakClassName={'item break-me '}
+                                    breakLabel={'...'}
+                                    containerClassName={'pagination'}
+                                    disabledClassName={'disabled-page'}
+                                    marginPagesDisplayed={0}
+                                    nextClassName={"item next"}
+                                    nextLabel={<i className='bi bi-caret-right' style={{ color: 'black'}} />}
+                                    onPageChange={handlePageClick}
+                                    pageCount={pageCount}
+                                    pageClassName={'item pagination-page '}
+                                    pageRangeDisplayed={0}
+                                    previousClassName={"item previous"}
+                                    previousLabel={<i className='bi bi-caret-left' style={{ color: 'black'}} />}
+                                />
+                                {currentPageData}
+                                {/* <ReactPaginate
                                     previousLabel={""}
                                     nextLabel={""}
                                     pageCount={pageCount}
@@ -112,7 +129,8 @@ const Profile = () => {
                                     nextLinkClassName={"bi bi-arrow-right-circle"}
                                     disabledClassName={"pagination__link--disabled"}
                                     activeClassName={"bg-danger"}
-                                />
+                                /> */}
+                                
                                 
                             </>
                         }
