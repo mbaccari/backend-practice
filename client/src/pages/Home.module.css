@@ -96,6 +96,12 @@
     height: 75%;
 }
 
+#charCount {
+    font-size: small;
+    font-weight: bolder;
+    color: rgba(0, 0, 0, .35);
+}
+
 #postButton {
     padding: none;
     width: 85px;

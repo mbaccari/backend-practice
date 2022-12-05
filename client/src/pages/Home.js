@@ -161,6 +161,7 @@ const Home = () => {
                                 type="text" 
                                 maxLength='300'
                             />
+                            <p id={styles.charCount}>{postState.body.length}/300</p>
 
                             <button id={styles.postButton} type="submit">submit</button>
                         </form>
