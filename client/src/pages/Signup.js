@@ -65,7 +65,7 @@ const Signup = () => {
         <div className="col-md-2 col-xs-0"></div>
 
         <div className="col-md-8 col-xs-12">
-          <h4 className="text-dark p-2 text-center display-4 fw-bold">Become a Trainer!</h4>
+          <h4 className="text-dark p-2 text-center display-4 fw-bold">Join BugBook!</h4>
           <div className="card-body">
             {loggedIn() ? (
               <p>
