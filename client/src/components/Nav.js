@@ -1,10 +1,10 @@
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 
 import styles from './Nav.module.css'
 const Nav = ({ user, page }) => {
 
-    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+    const [ removeCookie ] = useCookies(['token']);
     let letter;
     let userLink;
     if(user) {
@@ -14,7 +14,7 @@ const Nav = ({ user, page }) => {
 
     const logout = (event) => {
         event.preventDefault()
-        removeCookie('token',{path:'/'});
+        removeCookie('token');
     }
 
     const checkPage = () => {

@@ -10,7 +10,7 @@ import PostCard from '../components/PostCard';
 import UserCard from '../components/UserCard';
 
 const Home = () => {
-    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+    const [cookies, removeCookie] = useCookies(['token']);
     const [decodedToken, setDecodedToken] = useState('');
     const [posts, setPosts] = useState(null);
     const [b1, setB1] = useState(false);
