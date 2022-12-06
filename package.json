@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bootstrap-icons": "^1.9.1",
+    "gh-pages": "^4.0.0",
     "react-paginate": "^8.1.4"
   }
 }
