@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import styles from './Signup.module.css'
 
 import Auth from '../utils/Auth';
 
@@ -67,7 +68,7 @@ const Login = () => {
         <div className="col-md-2 col-xs-0"></div>
 
         <div className="col-md-8 col-xs-12">
-          <h4 className="text-dark p-2 text-center display-4 fw-bold">Login</h4>
+          <h4 style={{fontFamily: 'Times New Roman'}} className="text-dark p-2 text-center display-4 fw-bold">Login</h4>
           <div className="card-body">
 
           {loggedIn() ? (
@@ -76,25 +77,26 @@ const Login = () => {
               <Link to="/">back to the homepage.</Link>
             </p>
           ) : (
-          <form onSubmit={handleFormSubmit}>
-                <div className="form-outline mb-4">
+          <form id={styles.form
+            } onSubmit={handleFormSubmit}>
+                <div id={styles.group} className="form-outline mb-4">
                   <label className="form-label fs-5" htmlFor="form3Example1cg">Email:</label>
                   <input 
+                    id={styles.input}
                     type="text"
                     name="email"
-                    className="form-control form-control-lg shadow-sm" 
                     value={formState.email}
                     onChange={handleChange}
                     required
                   />
                   
                 </div>
-                <div className="form-outline mb-4">
+                <div id={styles.group} className="form-outline mb-4">
                   <label className="form-label fs-5" htmlFor="form3Example4cg">Password:</label>
                   <input 
+                    id={styles.input}
                     type="password"
                     name="password"
-                    className="form-control form-control-lg shadow-sm" 
                     value={formState.password}
                     onChange={handleChange}
                     required
@@ -103,7 +105,7 @@ const Login = () => {
                 </div>
                 <div className="d-flex justify-content-center">
                   <button
-                  className="btn btn-block btn-dark bg-danger mt-2 shadow"
+                  id={styles.submit}
                   style={{ cursor: 'pointer' }}
                   type="submit"
                   >Login</button>

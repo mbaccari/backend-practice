@@ -1,0 +1,33 @@
+#form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#group {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#input {
+    background-color: #2b2d422b;
+    border: 1px solid black;
+    width: 300px;
+    height: 40px;
+    box-shadow: -1px 1px 1px;
+    font-size: large;
+    resize: none;
+}
+
+#submit {
+    padding: none;
+    width: 85px;
+    background-color: #dddedd;
+    margin-top: 5%;
+    border: 1px solid black;
+    font-weight: lighter;
+    box-shadow: -1px 1px 1px;
+    font-family: 'Times New Roman', Times, serif;
+}

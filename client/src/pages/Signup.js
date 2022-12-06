@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import styles from './Signup.module.css'
 
 import Auth from '../utils/Auth';
 
@@ -52,10 +53,10 @@ const Signup = () => {
     })
         
     // clear form values
-    // setFormState({
-    //   email: '',
-    //   password: '',
-    // });
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
   return (
     <>
@@ -65,44 +66,44 @@ const Signup = () => {
         <div className="col-md-2 col-xs-0"></div>
 
         <div className="col-md-8 col-xs-12">
-          <h4 className="text-dark p-2 text-center display-4 fw-bold">Join BugBook!</h4>
+          <h4 style={{fontFamily: 'Times New Roman'}} className="text-dark p-2 text-center display-4 fw-bold">Join BugBook!</h4>
           <div className="card-body">
             {loggedIn() ? (
-              <p>
+              <p style={{fontFamily: 'Times New Roman'}}>
                 Success! Welcome {formState.username}{' '}
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
               
-              <form onSubmit={handleFormSubmit}>
-                <div className="form-outline mb-4">
+              <form id={styles.form} onSubmit={handleFormSubmit}>
+                <div id={styles.group} className="form-outline mb-4">
                   <label className="form-label fs-5" htmlFor="form3Example1cg">UserName:</label>
                   <input 
+                    id={styles.input}
                     type="text"
                     name="username"
-                    className="form-control form-control-lg shadow-sm" 
                     value={formState.username}
                     onChange={handleChange}
                   />
                   
                 </div>
-                <div className="form-outline mb-4">
+                <div id={styles.group} className="form-outline mb-4">
                   <label className="form-label fs-5" htmlFor="form3Example3cg">Email:</label>
                   <input 
+                    id={styles.input}
                     type="email" 
                     name="email"
-                    className="form-control form-control-lg shadow-sm" 
                     value={formState.email}
                     onChange={handleChange}
                   />
                   
                 </div>
-                <div className="form-outline mb-4">
-                  <label className="form-label fs-5" htmlFor="form3Example4cg">Password:</label>
+                <div id={styles.group} className="form-outline mb-4">
+                  <label>Password:</label>
                   <input 
+                    id={styles.input}
                     type="password"
                     name="password"
-                    className="form-control form-control-lg shadow-sm" 
                     value={formState.password}
                     onChange={handleChange}
                   />
@@ -110,10 +111,10 @@ const Signup = () => {
                 </div>
                 <div className="d-flex justify-content-center">
                   <button
-                  className="btn btn-block btn-dark bg-danger mt-2 shadow"
+                  id={styles.submit}
                   style={{ cursor: 'pointer' }}
                   type="submit"
-                  >Start Training!</button>
+                  >Sign Up</button>
                 </div>
                 <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login" className="fw-bold text-body">Login Here</Link></p>
               </form>
