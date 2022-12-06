@@ -21,7 +21,7 @@ const Home = () => {
         console.log('refreshing posts')
         axios({
             method: 'get',
-            url: 'http://localhost:3080/api/posts/'
+            url: '/api/posts/'
         }).then(res => {
             let postArray = [];
             if(res.data.length === 0) return;
