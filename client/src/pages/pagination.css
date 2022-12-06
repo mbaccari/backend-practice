@@ -21,9 +21,7 @@
   }
   
   .next {
-    border: 2px solid black;
-    color: black;
-    font-size: 50px;
+    font-size: 40px;
     height: 60px;
     position: absolute;
     right: 0;
@@ -48,15 +46,13 @@
   }
   
   .previous {
-    border: 2px solid black;
-    color: black;
-    font-size: 50px;
+    font-size: 40px;
     height: 60px;
     left: 0;
     position: absolute;
     width: 50px;
   }
 
-  .next:hover, .previous:hover {
+  .next:hover {
     color: white;
   }

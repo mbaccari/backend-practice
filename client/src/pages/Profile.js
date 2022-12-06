@@ -110,13 +110,13 @@ const Profile = () => {
                                     disabledClassName={'disabled-page'}
                                     marginPagesDisplayed={0}
                                     nextClassName={"item next"}
-                                    nextLabel={<i className='bi bi-caret-right' style={{ color: 'black'}} />}
+                                    nextLabel={<i className='bi bi-caret-right' style={{ color: '#2b2d4280'}} />}
                                     onPageChange={handlePageClick}
                                     pageCount={pageCount}
                                     pageClassName={'item pagination-page '}
                                     pageRangeDisplayed={0}
                                     previousClassName={"item previous"}
-                                    previousLabel={<i className='bi bi-caret-left' style={{ color: 'black'}} />}
+                                    previousLabel={<i className='bi bi-caret-left' style={{ color: '#2b2d4280'}} />}
                                 />
                                 {currentPageData}
                                 {/* <ReactPaginate
