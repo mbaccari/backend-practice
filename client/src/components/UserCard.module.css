@@ -40,6 +40,25 @@
     cursor: pointer;
 }
 
+#form {
+    display: flex;
+    justify-content: space-between;
+}
+
+#bioForm {
+    width: 80%;
+    background-color: #2b2d422b;
+    border: 1px solid black;
+    height: 75px;
+    box-shadow: -1px 1px 1px;
+    resize: none;
+}
+
+#bioButton {
+    border: none;
+    background-color: transparent;
+}
+
 #bioBox {
     max-width: 300px;
     text-align: center;

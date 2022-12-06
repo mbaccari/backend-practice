@@ -68,14 +68,14 @@ const UserCard = ({ userInfo }) => {
                                 <p id={styles.bioBox}>{user.bio}</p>
                             </div>
                         :
-                            <form onSubmit={bioChange}>
+                            <form id={styles.form} onSubmit={bioChange}>
                                 <textarea
-                                    id="bio"
+                                    id={styles.bioForm}
                                     name="bio"
                                     value={bio}
                                     onChange={handleChange}
                                 />
-                                <button type='submit'>Add bio</button>
+                                <button id={styles.bioButton} type='submit'>Save</button>
                             </form>
                         }
                         </div>
