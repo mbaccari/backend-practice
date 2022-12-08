@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "homepage": "/",
+  "homepage": "https://638eccb497124e6dfa6377f3--profound-piroshki-506f57.netlify.app/",
   "private": true,
   "proxy": "http://localhost:3080",
   "dependencies": {
