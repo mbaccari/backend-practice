@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/backend-practice/static/css/main.6a4c1a6c.css",
-    "main.js": "/backend-practice/static/js/main.a8cc0d85.js",
+    "main.js": "/backend-practice/static/js/main.c67b9589.js",
     "static/media/bootstrap-icons.woff?": "/backend-practice/static/media/bootstrap-icons.6959d0d983ee318f8880.woff",
     "static/media/bootstrap-icons.woff2?": "/backend-practice/static/media/bootstrap-icons.b2e5aab643c6f0fd2da6.woff2",
     "index.html": "/backend-practice/index.html",
     "main.6a4c1a6c.css.map": "/backend-practice/static/css/main.6a4c1a6c.css.map",
-    "main.a8cc0d85.js.map": "/backend-practice/static/js/main.a8cc0d85.js.map"
+    "main.c67b9589.js.map": "/backend-practice/static/js/main.c67b9589.js.map"
   },
   "entrypoints": [
     "static/css/main.6a4c1a6c.css",
-    "static/js/main.a8cc0d85.js"
+    "static/js/main.c67b9589.js"
   ]
 }
