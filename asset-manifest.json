@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mbaccari.github.io/backend-practice/static/css/main.801e1fde.css",
-    "main.js": "/mbaccari.github.io/backend-practice/static/js/main.68a75ca7.js",
+    "main.js": "/mbaccari.github.io/backend-practice/static/js/main.5c39324d.js",
     "static/media/bootstrap-icons.woff?": "/mbaccari.github.io/backend-practice/static/media/bootstrap-icons.6959d0d983ee318f8880.woff",
     "static/media/bootstrap-icons.woff2?": "/mbaccari.github.io/backend-practice/static/media/bootstrap-icons.b2e5aab643c6f0fd2da6.woff2",
     "index.html": "/mbaccari.github.io/backend-practice/index.html",
     "main.801e1fde.css.map": "/mbaccari.github.io/backend-practice/static/css/main.801e1fde.css.map",
-    "main.68a75ca7.js.map": "/mbaccari.github.io/backend-practice/static/js/main.68a75ca7.js.map"
+    "main.5c39324d.js.map": "/mbaccari.github.io/backend-practice/static/js/main.5c39324d.js.map"
   },
   "entrypoints": [
     "static/css/main.801e1fde.css",
-    "static/js/main.68a75ca7.js"
+    "static/js/main.5c39324d.js"
   ]
 }
