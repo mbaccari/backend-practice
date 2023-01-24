@@ -40,7 +40,7 @@ const Signup = () => {
     event.preventDefault();
     axios({
       method: 'post',
-      url: '/api/users/signup',
+      url: 'https://localhost:3080/api/users/signup',
       data: formState
     }).then(res => {
       const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
@@ -116,7 +116,7 @@ const Signup = () => {
                   type="submit"
                   >Sign Up</button>
                 </div>
-                <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login" className="fw-bold text-body">Login Here</Link></p>
+                <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="https://mbaccari.github.io/backend-practice/login" className="fw-bold text-body">Login Here</a></p>
               </form>
 
             )}

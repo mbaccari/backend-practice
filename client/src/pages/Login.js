@@ -39,7 +39,7 @@ const Login = () => {
     const { email, password } = formState;
     axios({
       method: 'post',
-      url: '/api/users/login',
+      url: 'http://localhost:3080/api/users/login',
       data: {
         email: email,
         password: password
@@ -47,6 +47,7 @@ const Login = () => {
     }).then(res => {
       const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
       console.log(res.data.match(regex))
+      console.log('ooga')
       if(res.data.match(regex)) {
         setCookie('token', res.data)
       } else {
