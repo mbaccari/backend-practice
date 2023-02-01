@@ -1,6 +1,6 @@
 
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Route, Routes, Link } from "react-router-dom";
+import { Router, Route, Routes, Link } from "react-router-dom";
 
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -35,9 +35,9 @@ function App() {
         </Router> */}
         <Routes>
           <Route exact path='/' element={<Home/>}/>
-            <Route exact path='/Login' element={<Login/>}/>
-            <Route exact path='/Signup' element={<Signup/>}/>
-            <Route exact path='/:userId' element={<Profile/>}/>
+            <Route path='/Login' element={<Login/>}/>
+            <Route path='/Signup' element={<Signup/>}/>
+            <Route path='/:userId' element={<Profile/>}/>
           
         </Routes>
       </header>

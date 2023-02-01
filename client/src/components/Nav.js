@@ -28,7 +28,7 @@ const Nav = ({ user, page }) => {
     return (
         <nav id={styles.mainNav} className="navbar navbar-expand-sm navbar-dark">
             <div className="container-fluid text-center">
-                <a className="navbar-brand col-4" id={styles.title} href="/">BugBook</a>
+                <Link className="navbar-brand col-4" id={styles.title} to="/">BugBook</Link>
                 
                 {!user ? 
                     <div>

@@ -116,7 +116,7 @@ const Signup = () => {
                   type="submit"
                   >Sign Up</button>
                 </div>
-                <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="https://mbaccari.github.io/backend-practice/login" className="fw-bold text-body">Login Here</a></p>
+                <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login" className="fw-bold text-body">Register Here</Link></p>
               </form>
 
             )}

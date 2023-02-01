@@ -60,12 +60,14 @@ module.exports = {
     async login(req, res) {
         console.log(req.body)
         try{
-            const user = await User.findOne({ email: req.body.email })
+            console.log('what is happening')
+            const user = await User.findOne({ email: req.body.email }).then((e)=> {console.log(e)})
             if(!user) {
                 res.send('No user found with this email')
             }
             const correctPw = await user.isCorrectPassword(req.body.password);
             if(!correctPw) {
+                console.log('incorrect password or email')
                 res.send('Incorrect password or email')
             }
             const token = signToken(user);
