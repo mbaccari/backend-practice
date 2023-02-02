@@ -61,18 +61,41 @@ module.exports = {
         console.log(req.body)
         try{
             console.log('what is happening')
-            const user = await User.findOne({ email: req.body.email }).then((e)=> {console.log(e)})
-            if(!user) {
-                res.send('No user found with this email')
-            }
-            const correctPw = await user.isCorrectPassword(req.body.password);
-            if(!correctPw) {
-                console.log('incorrect password or email')
-                res.send('Incorrect password or email')
-            }
-            const token = signToken(user);
-            console.log('ooo')
-            res.send(token)
+            // const user = await 
+            User.findOne({ email: req.body.email }).then((e)=> {
+
+                if(!e) {
+                    console.log('no user')
+                    res.send('No user found with this email')
+                };
+                const correctPw = e.isCorrectPassword(req.body.password);
+
+                if(!correctPw) {
+                    console.log(correctPw)
+                    console.log('incorrect password or email')
+                    res.send('Incorrect password or email')
+                }   
+
+
+                const token = signToken(e);
+                console.log('ooo')
+                res.send(token)
+            
+            
+            })
+
+
+            // if(!user) {
+            //     res.send('No user found with this email')
+            // }
+            // const correctPw = await user.isCorrectPassword(req.body.password);
+            // if(!correctPw) {
+            //     console.log('incorrect password or email')
+            //     res.send('Incorrect password or email')
+            // }
+            // const token = signToken(user);
+            // console.log('ooo')
+            // res.send(token)
         } 
         catch{ 
             (err) => {
