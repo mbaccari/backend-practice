@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cookieParser())
 
 const corsOptions = {
-  methods: ['GET', 'POST', 'PUT']
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }
 app.use(cors(corsOptions));
 

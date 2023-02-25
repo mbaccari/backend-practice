@@ -28,6 +28,7 @@ module.exports = {
     },
 
     async signUp(req, res) {
+        console.log('signing up')
         
         const usedEmail = await User.findOne({ email: req.body.email })
             
@@ -83,19 +84,6 @@ module.exports = {
             
             
             })
-
-
-            // if(!user) {
-            //     res.send('No user found with this email')
-            // }
-            // const correctPw = await user.isCorrectPassword(req.body.password);
-            // if(!correctPw) {
-            //     console.log('incorrect password or email')
-            //     res.send('Incorrect password or email')
-            // }
-            // const token = signToken(user);
-            // console.log('ooo')
-            // res.send(token)
         } 
         catch{ 
             (err) => {
