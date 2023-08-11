@@ -16,17 +16,20 @@ const PostCard = ({ postData, user }) => {
     }
 
     const deletePost = async (event) => {
+        console.log('help')
         axios({
             method: 'delete',
-            url: '/api/posts/delete',
+            url: 'https://bugbook.herokuapp.com/api/posts/delete',
             data: {
               id: event.target.dataset.id
             }
           }).then(res => {
             console.log(res)
+            
           })
-        console.log(event.target.dataset.id)
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+          }, "1000")
 
     }
     

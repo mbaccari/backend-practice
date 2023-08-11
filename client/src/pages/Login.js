@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie'
+
 import axios from 'axios';
 import styles from './Signup.module.css'
 
@@ -17,7 +19,7 @@ const Login = () => {
     } else if(Auth.isTokenExpired(cookies.token)) {
       removeCookie('token',{path:'/'});
       return false;
-    } else if(Auth.isToken(cookies.token)) {
+    } else if(Auth.isToken(Cookies.get('token'))) {
       return true;
     }
   }
@@ -37,21 +39,29 @@ const Login = () => {
     event.preventDefault();
 
     const { email, password } = formState;
+    console.log(email)
+    console.log(email.toLowerCase())
+    const lowerEmail = email.toLowerCase();
     axios({
       method: 'post',
-      url: 'http://localhost:3080/api/users/login',
+      url: 'https://bugbook.herokuapp.com/api/users/login',
       data: {
-        email: email,
+        email:email,
         password: password
       }
     }).then(res => {
       const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
       console.log(res.data.match(regex))
-      console.log('ooga')
+      console.log(res)
+      console.log('ooga booga')
       if(res.data.match(regex)) {
-        setCookie('token', res.data)
+        var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+        console.log(inFifteenMinutes)
+        Cookies.set('token', res.data, { expires: inFifteenMinutes})
+        window.location.reload()
+        // setCookie('token', res.data, {httpOnly: false})
       } else {
-        console.log('Incorrect username or password')
+        console.log('Incorrect username or password front end')
       }
       
     })

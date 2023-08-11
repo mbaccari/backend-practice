@@ -29,7 +29,6 @@ const Profile = () => {
     const currentPageData = data
         .slice(offset, offset + PER_PAGE)
         .map((post, index) => {
-            console.log(post)
             return <PostCard user={decodedToken} key={index} postData={post} />
         });
     const pageCount = Math.ceil(data.length / PER_PAGE);
@@ -40,9 +39,8 @@ const Profile = () => {
 
 
 
-    const getUser = `/api/users/${useParams().userId}`;
-    const getPosts = `/api/posts/userposts/${useParams().userId}`
-    
+    const getUser = `https://bugbook.herokuapp.com/api/users/${useParams().userId}`;
+    const getPosts = `https://bugbook.herokuapp.com/api/posts/userposts/${useParams().userId}`
     useEffect(() => {
         if(cookies.token) {
             if(Auth.isTokenExpired(cookies.token)) {
@@ -55,7 +53,6 @@ const Profile = () => {
             method: 'get',
             url: getUser
           }).then(res => {
-            console.log(res.data)
             if(res.data.length === 0) return;
             axios({
                 method: 'get',
@@ -92,15 +89,8 @@ const Profile = () => {
                 
                 :
                 <div id={styles.pageContainer}>
-                    <UserCard userInfo={user} />
+                    <UserCard userInfo={user} token={decodedToken} />
                     {!arePosts() ? 'Feed empty': 
-                            // <div id={styles.postContainer}>
-                            //     {posts.map((post, index) => {
-                            //         return (
-                            //             <PostCard user={decodedToken} key={index} postData={post} />
-                            //         )
-                            //     })}
-                            // </div>
                             <>
                                 <ReactPaginate
                                     activeClassName={'item active '}
@@ -119,18 +109,6 @@ const Profile = () => {
                                     previousLabel={<i className='bi bi-caret-left' style={{ color: '#2b2d4280'}} />}
                                 />
                                 {currentPageData}
-                                {/* <ReactPaginate
-                                    previousLabel={""}
-                                    nextLabel={""}
-                                    pageCount={pageCount}
-                                    onPageChange={handlePageClick}
-                                    containerClassName={"pagination"}
-                                    previousLinkClassName={"bi bi-arrow-left-circle"}
-                                    nextLinkClassName={"bi bi-arrow-right-circle"}
-                                    disabledClassName={"pagination__link--disabled"}
-                                    activeClassName={"bg-danger"}
-                                /> */}
-                                
                                 
                             </>
                         }

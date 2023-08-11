@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie'
 
 import styles from './Home.module.css'
 
@@ -21,7 +22,7 @@ const Home = () => {
         console.log('refreshing posts')
         axios({
             method: 'get',
-            url: '/api/posts/'
+            url: 'https://bugbook.herokuapp.com/api/posts/'
         }).then(res => {
             let postArray = [];
             if(res.data.length === 0) return;
@@ -35,14 +36,17 @@ const Home = () => {
             setB3(false);
         }).catch(err => console.log(err))
     }
+
     useEffect(() => {
         if(!cookies.token) return;
         if(Auth.isTokenExpired(cookies.token)) {
-            removeCookie('token')
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         } else if(Auth.isLoggedIn(cookies.token)) {
+            console.log(Auth.decodeToken(cookies.token))
             setDecodedToken(Auth.decodeToken(cookies.token))
             getAllPosts()
         }
+        console.log(Cookies.get('token'))
 
     }, [cookies.token, removeCookie]);
 
@@ -62,7 +66,8 @@ const Home = () => {
             return false;
         } else if(Auth.isTokenExpired(cookies.token)) {
             console.log('is token')
-            removeCookie('token',{path:'/'});
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            // removeCookie('token');
             return false;
         } else if(Auth.isToken(cookies.token)) {
             return true;
@@ -73,10 +78,14 @@ const Home = () => {
         event.preventDefault()
         if(!loggedIn()) return;
         const { title, body } = postState;
+
+        const newTitle = title.trim()
+        console.log(newTitle)
+        console.log(newTitle)
         if(!title || !body) return;
         axios({
             method: 'post',
-            url: '/api/posts/post',
+            url: 'https://bugbook.herokuapp.com/api/posts/post',
             data: {
               title: title,
               body: body,
@@ -91,6 +100,9 @@ const Home = () => {
           title: '',
           body: '',
         });
+        // setTimeout(function(){
+        //     window.location.reload()
+        // }, 2000);
     }
 
     const arePosts = () => {
@@ -180,7 +192,7 @@ const Home = () => {
                     </div>
                     <div data-id='profile' id={styles.block} className={`d-flex flex-column align-items-center ${!b3 ? 'd-none': ''}`}>
                         {!decodedToken ? 'Loading' :
-                            <UserCard userInfo={decodedToken} />
+                            <UserCard userInfo={decodedToken} token={decodedToken} />
                         }
                         
                     </div>

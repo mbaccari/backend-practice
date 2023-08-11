@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie'
 
 import styles from './Nav.module.css'
 const Nav = ({ user, page }) => {
@@ -13,8 +14,12 @@ const Nav = ({ user, page }) => {
     }
 
     const logout = (event) => {
-        event.preventDefault()
-        removeCookie('token');
+        // document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // removeCookie('token',{path:'/'});
+        // cookie.remove('token')
+        Cookies.remove('token')
+        console.log('uwuw')
+        window.location.reload()
     }
 
     const checkPage = () => {

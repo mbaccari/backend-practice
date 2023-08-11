@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import styles from './UserCard.module.css'
 
-const UserCard = ({ userInfo }) => {
-    const url = `/api/users/${userInfo._id}`;
+const UserCard = ({ userInfo, token }) => {
+    const url = `https://bugbook.herokuapp.com/api/users/${userInfo._id}`;
     const letter = userInfo.username.split('')[0].toUpperCase();
     const [ user, setUser ] = useState(null);
+    const [ bioEdit, setBioEdit ] = useState(false)
     const [ bio, setBio ] = useState('')
 
     const getUser = async () => {
@@ -14,7 +15,6 @@ const UserCard = ({ userInfo }) => {
             url: url
         }).then(res => {
             if(res.data.length === 0) return;
-            console.log(res.data)
             const { email, bio, username, _id } = res.data
             setUser({bio:bio, username: username, email: email, id: _id});
         }).catch(err => console.log(err))
@@ -22,24 +22,37 @@ const UserCard = ({ userInfo }) => {
 
     useEffect(() => {
         getUser();
+        console.log(token)
+        console.log(userInfo)
     }, [])
 
     const handleChange = (event) => {
         
         setBio(event.target.value)
-        console.log(bio)
+    }
+
+    const isUserLoggedIn = () => {
+        if(token._id === userInfo._id) {
+            return true;
+        } else if(token._id !== userInfo._id) {
+            return false;
+        }
     }
 
     const editBio = (event) => {
         event.preventDefault();
+        if(bioEdit === true) {
+            setBioEdit(false)
+        } else if(bioEdit === false) {
+            setBioEdit(true)
+        }
         setUser({...user, bio: ''})
     }    
     const bioChange = (event) => {
         event.preventDefault();
-        console.log(bio)
         axios({
             method: 'post',
-            url: '/api/users/editUser',
+            url: 'https://bugbook.herokuapp.com/api/users/editUser',
             data: {
               id: user.id,
               edit: 'bio',
@@ -47,6 +60,11 @@ const UserCard = ({ userInfo }) => {
             }
           }).then((res) => {
             setUser({...user, bio: bio})
+            if(bioEdit === true) {
+                setBioEdit(false)
+            } else if(bioEdit === false) {
+                setBioEdit(true)
+            }
           })
     }
 
@@ -60,9 +78,20 @@ const UserCard = ({ userInfo }) => {
                     {user.username ? <h5 id={styles.username}>{user.username}</h5> : <p>no username</p>}
                     
                     <div id={styles.body}>
-                            <h4>Bio {!user.bio ? '' : <i id={styles.editBio} className='bi bi-pencil' onClick={editBio}></i> }</h4>
+                            <h4>Bio {bioEdit ? '' : 
+                            
+                            <>
+                                {!isUserLoggedIn() ? '': 
+                                <i id={styles.editBio} className='bi bi-pencil' onClick={editBio}></i> 
+                                }
+                                
+                            </>
+
+                            
+                            }</h4>
                         
-                        {user.bio ?
+
+                        {!bioEdit ?
                             <div>
                                 <hr id={styles.hr} />
                                 <p id={styles.bioBox}>{user.bio}</p>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie'
 import axios from 'axios';
 import styles from './Signup.module.css'
 
@@ -38,23 +39,38 @@ const Signup = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log('hmm')
+    const { username, email, password } = formState;
+    console.log(email)
+    console.log(email.toLowerCase())
     axios({
       method: 'post',
-      url: 'https://localhost:3080/api/users/signup',
-      data: formState
+      url: 'https://bugbook.herokuapp.com/api/users/signup',
+      data: {
+        username: username,
+        email: email.toLowerCase(),
+        password: password
+      }
     }).then(res => {
       const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
       console.log(res.data.match(regex))
+      console.log(res)
+      console.log('ooga booga')
       if(res.data.match(regex)) {
-        setCookie('token', res.data)
+        var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+        console.log(inFifteenMinutes)
+        Cookies.set('token', res.data, { expires: inFifteenMinutes})
+        window.location.reload()
+        // setCookie('token', res.data, {httpOnly: false})
       } else {
-        console.log('Please fill out correctly')
+        console.log('')
       }
+      
     })
         
     // clear form values
     setFormState({
-      email: '',
+      email: email, 
       password: '',
     });
   };
@@ -116,7 +132,7 @@ const Signup = () => {
                   type="submit"
                   >Sign Up</button>
                 </div>
-                <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login" className="fw-bold text-body">Register Here</Link></p>
+                <p className="text-center text-muted mt-5 mb-0">Already have an account? <Link to="/login" className="fw-bold text-body">Register Here</Link></p>
               </form>
 
             )}
