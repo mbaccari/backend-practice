@@ -22,6 +22,8 @@ const PORT = process.env.PORT || 3001;
 // Creating express app
 const app = express();
 
+const path = require('path');
+
 
 // Express.urlencoded() and express.json() are 
 // middleware to recognize incoming requests as Objects or Strings (urlencoded) or JSON (json)
